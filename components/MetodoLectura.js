@@ -16,8 +16,20 @@ const combinacionesVC = [
 const gruposConsonantesComunes = ['br', 'bl', 'cr', 'cl', 'dr', 'fl', 'fr', 'gr', 'gl', 'pr', 'pl', 'tr'];
 const diptongos = ['ia', 'ie', 'io', 'iu', 'ai', 'ei', 'oi', 'ui', 'au', 'eu', 'ou'];
 const palabrasBisilabas = ['casa', 'perro', 'mesa', 'silla', 'libro', 'árbol', 'pato', 'gato', 'oso', 'ala', 'uva', 'isla', 'nube', 'rosa', 'pera'];
-const palabrasCortas = ['sol', 'mar', 'luz', 'pan', 'flor', 'tren', 'pez', 'luna', 'casa', 'perro'];
-const frasesCortas = ['El sol brilla', 'La luna es blanca', 'El perro ladra', 'La flor es roja', 'El tren va rápido'];
+export const palabrasNivel3 = [
+  'casa', 'perro', 'gato', 'árbol', 'flor', 'sol', 'luna', 'estrella',
+  'agua', 'fuego', 'tierra', 'aire', 'libro', 'mesa', 'silla', 'cama',
+  'puerta', 'ventana', 'coche', 'bici', 'tren', 'avión', 'barco', 'pez',
+  'pájaro', 'mano', 'pie', 'ojo', 'nariz', 'boca', 'oreja', 'diente',
+  'pelo', 'brazo', 'pierna', 'dedo', 'uña', 'corazón', 'cerebro', 'hueso',
+  'rojo', 'azul', 'verde', 'amarillo', 'blanco', 'negro', 'rosa', 'naranja',
+  'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez'
+];
+export const frasesNivel4 = [
+  'El sol brilla', 'La luna es blanca', 'El perro ladra', 'El gato maulla', 'La flor es roja', 'El cielo es azul', 'La casa es grande', 'El árbol es alto', 'El pez nada',
+  'El pájaro vuela', 'La niña corre', 'El niño salta', 'La mesa es marrón', 'La silla es verde', 'El libro es nuevo', 'La puerta está abierta', 'La ventana está cerrada',
+  'El coche es rápido', 'La bici es pequeña', 'El tren es largo'
+];
 
 const generarSilabaSimple = () => {
   const randomNum = Math.random();
@@ -110,26 +122,16 @@ const generarContenido = () => {
   }, [nivel]);
 
 const renderContenido = () => {
+  const renderLetra = (letra, index) => (
+    <span key={index} style={{color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante, fontSize: '8rem'}}>
+      {letra}
+    </span>
+  );
+
   if ('frase' in contenido) {
-    return (
-      <span style={{fontSize: '3rem'}}>
-        {contenido.frase.split('').map((letra, index) => (
-          <span key={index} style={{color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante}}>
-            {letra}
-          </span>
-        ))}
-      </span>
-    );
+    return <div>{contenido.frase.split('').map(renderLetra)}</div>;
   } else if ('palabra' in contenido) {
-    return (
-      <span style={{fontSize: '4rem'}}>
-        {contenido.palabra.split('').map((letra, index) => (
-          <span key={index} style={{color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante}}>
-            {letra}
-          </span>
-        ))}
-      </span>
-    );
+    return <div>{contenido.palabra.split('').map(renderLetra)}</div>;
   } else {
     return (
       <>
@@ -139,7 +141,6 @@ const renderContenido = () => {
     );
   }
 };
-
   return (
     <div className="max-w-sm mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="px-6 py-4">
