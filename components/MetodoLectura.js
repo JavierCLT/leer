@@ -15,6 +15,24 @@ const combinacionesVC = [
   'az', 'ez', 'iz', 'oz', 'uz'
 ];
 
+const combinacionesDosLetras = {
+  "vc": [
+    "al", "as", "an", "ar", "el", "en", "es", "et", "il", "in", "is", "it", "ol", "on", "or", "os", "ot", "ul", "un", "ur"
+  ],
+  "cv": [
+    "ba", "be", "bi", "bo", "bu", "ca", "ce", "ci", "co", "cu", "da", "de", "di", "do", "du", "fa", "fe", "fi", "fo", "fu",
+    "ga", "ge", "gi", "go", "gu", "ja", "je", "ji", "jo", "ju", "la", "le", "li", "lo", "lu", "ma", "me", "mi", "mo", "mu",
+    "na", "ne", "ni", "no", "nu", "pa", "pe", "pi", "po", "pu", "ra", "re", "ri", "ro", "ru", "sa", "se", "si", "so", "su",
+    "ta", "te", "ti", "to", "tu", "va", "ve", "vi", "vo", "vu", "ya", "ye", "yi", "yo", "yu", "za", "ze", "zi", "zo", "zu"
+  ],
+  "vv": [
+    "ai", "au", "ei", "eu", "ia", "ie", "io", "iu", "oi", "ou", "ua", "ue", "ui", "uo"
+  ],
+  "cc": [
+    "br", "bl", "cr", "cl", "dr", "fr", "fl", "gr", "gl", "pr", "pl", "tr", "tl"
+  ]
+};
+
 const combinacionesTresLetras = {
   // Consonante + Vocal + Consonante (CVC)
   cvc: [
@@ -49,24 +67,36 @@ const diptongos = ['ia', 'ie', 'io', 'iu', 'ai', 'ei', 'oi', 'ui', 'au', 'eu', '
 const palabrasBisilabas = ['casa', 'perro', 'mesa', 'silla', 'libro', 'árbol', 'pato', 'gato', 'oso', 'ala', 'uva', 'isla', 'nube', 'rosa', 'pera'];
 
 const generarSilabaSimple = () => {
-  const randomNum = Math.random();
+  const tipos = Object.keys(combinacionesDosLetras);
+  const tipoAleatorio = tipos[Math.floor(Math.random() * tipos.length)];
+  const combinacionAleatoria = combinacionesDosLetras[tipoAleatorio][Math.floor(Math.random() * combinacionesDosLetras[tipoAleatorio].length)];
   
-  if (randomNum < 0.2) { // 20% de probabilidad de generar una combinación vocal+consonante
-    const combinacion = combinacionesVC[Math.floor(Math.random() * combinacionesVC.length)];
-    return { 
-      consonante: combinacion[1], 
-      vocal: combinacion[0]
-    };
-  } else if (randomNum < 0.4) { // 20% de probabilidad de empezar con vocal
-    const vocal = vocales[Math.floor(Math.random() * vocales.length)];
-    const consonante = consonantesNormales[Math.floor(Math.random() * consonantesNormales.length)];
-    return { consonante: '', vocal: vocal + consonante };
-  } else if (randomNum < 0.64) { // ~24% de probabilidad de que salga una consonante especial o 'z'
-    // ... (mantén el código existente para consonantes especiales y 'z')
-  } else {
-    const consonante = consonantesNormales[Math.floor(Math.random() * consonantesNormales.length)];
-    const vocal = vocales[Math.floor(Math.random() * vocales.length)];
-    return { consonante, vocal };
+  switch(tipoAleatorio) {
+    case 'vc':
+      return {
+        consonante: combinacionAleatoria[1],
+        vocal: combinacionAleatoria[0]
+      };
+    case 'cv':
+      return {
+        consonante: combinacionAleatoria[0],
+        vocal: combinacionAleatoria[1]
+      };
+    case 'vv':
+      return {
+        consonante: '',
+        vocal: combinacionAleatoria
+      };
+    case 'cc':
+      return {
+        consonante: combinacionAleatoria,
+        vocal: vocales[Math.floor(Math.random() * vocales.length)]
+      };
+    default:
+      return {
+        consonante: 'e',
+        vocal: 'r'
+      };
   }
 };
 
