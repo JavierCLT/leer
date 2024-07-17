@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from 'react';
 
 const colores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'];
+const vocales = ['a', 'e', 'i', 'o', 'u'];
 const consonantesEspeciales = ['qu', 'gu', 'ch'];
 const consonantesNormales = ['m', 'p', 's', 't', 'l', 'n', 'd', 'f', 'j', 'r', 'b', 'h', 'x', 'c', 'v', 'y'];
-const vocales = ['a', 'e', 'i', 'o', 'u'];
+const combinacionesVC = [
+  'an', 'en', 'in', 'on', 'un',
+  'as', 'es', 'is', 'os', 'us',
+  'al', 'el', 'il', 'ol', 'ul',
+  'ar', 'er', 'ir', 'or', 'ur',
+  'ad', 'ed', 'id', 'ud',
+  'az', 'ez', 'iz', 'oz', 'uz'
+];
 
 const generarSilaba = () => {
-  if (Math.random() < 0.25) { // 25% de probabilidad de que salga una consonante especial o 'z'
-    if (Math.random() < 0.8) { // 80% de este 25% para consonantes especiales
+  if (Math.random() < 0.2) { // 20% de probabilidad de generar una combinación vocal+consonante
+    const combinacion = combinacionesVC[Math.floor(Math.random() * combinacionesVC.length)];
+    return { 
+      consonante: combinacion[1], 
+      vocal: combinacion[0]
+    };
+  } else if (Math.random() < 0.3) { // ~24% de probabilidad de que salga una consonante especial o 'z'
+    if (Math.random() < 0.8) { // 80% de este 24% para consonantes especiales
       const consonanteEspecial = consonantesEspeciales[Math.floor(Math.random() * consonantesEspeciales.length)];
       let vocal;
       
@@ -18,7 +32,7 @@ const generarSilaba = () => {
       }
       
       return { consonante: consonanteEspecial, vocal };
-    } else { // 20% de este 25% para 'z'
+    } else { // 20% de este 24% para 'z'
       const vocalesParaZ = ['a', 'o', 'u'];
       return {
         consonante: 'z',
@@ -46,18 +60,29 @@ const MetodoLectura = () => {
   }, []);
 
   return (
-    <div className="max-w-sm mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
-      <div className="px-6 py-4">
-        <div className="text-center mb-6">
-          <span style={{color: colorConsonante, fontSize: '8rem'}}>{silaba.consonante}</span>
-          <span style={{color: 'black', fontSize: '8rem'}}>{silaba.vocal}</span>
-        </div>
-        <button onClick={nuevaSilaba} className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Nueva Sílaba
-        </button>
+  <div className="max-w-sm mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className="px-6 py-4">
+      <div className="text-center mb-6">
+        {silaba.vocal === silaba.consonante[0] ? (
+          // Para combinaciones VC
+          <span style={{fontSize: '8rem'}}>
+            <span style={{color: 'black'}}>{silaba.vocal}</span>
+            <span style={{color: colorConsonante}}>{silaba.consonante[1]}</span>
+          </span>
+        ) : (
+          // Para combinaciones CV normales
+          <>
+            <span style={{color: colorConsonante, fontSize: '8rem'}}>{silaba.consonante}</span>
+            <span style={{color: 'black', fontSize: '8rem'}}>{silaba.vocal}</span>
+          </>
+        )}
       </div>
+      <button onClick={nuevaSilaba} className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Nueva Sílaba
+      </button>
     </div>
-  );
+  </div>
+);
 };
 
 export default MetodoLectura;
