@@ -13,10 +13,11 @@ const combinacionesVC = [
   'az', 'ez', 'iz', 'oz', 'uz'
 ];
 
-const gruposConsonantesValidos = [
-  'bl', 'br', 'cl', 'cr', 'dr', 'fl', 'fr', 'gl', 'gr',
-  'pl', 'pr', 'tr', 'tl'
-];
+const gruposConsonantesComunes = ['br', 'bl', 'cr', 'cl', 'dr', 'fl', 'fr', 'gr', 'gl', 'pr', 'pl', 'tr'];
+const diptongos = ['ia', 'ie', 'io', 'iu', 'ai', 'ei', 'oi', 'ui', 'au', 'eu', 'ou'];
+const palabrasBisilabas = ['casa', 'perro', 'mesa', 'silla', 'libro', 'árbol', 'pato', 'gato', 'oso', 'ala', 'uva', 'isla', 'nube', 'rosa', 'pera'];
+const palabrasCortas = ['sol', 'mar', 'luz', 'pan', 'flor', 'tren', 'pez', 'luna', 'casa', 'perro'];
+const frasesCortas = ['El sol brilla', 'La luna es blanca', 'El perro ladra', 'La flor es roja', 'El tren va rápido'];
 
 const generarSilabaSimple = () => {
   const randomNum = Math.random();
@@ -53,20 +54,24 @@ const generarSilabaSimple = () => {
   }
 };
 
-const generarSilabaCompleja = () => {
-  const grupoConsonante = gruposConsonantesValidos[Math.floor(Math.random() * gruposConsonantesValidos.length)];
-  const vocal = vocales[Math.floor(Math.random() * vocales.length)];
+const generarContenidoNivel2 = () => {
+  const tipo = Math.random();
   
-  if (Math.random() < 0.7) {
-    return { consonante: grupoConsonante, vocal: vocal }; // CCV
+  if (tipo < 0.33) {
+    // Sílaba con grupo consonántico
+    const grupo = gruposConsonantesComunes[Math.floor(Math.random() * gruposConsonantesComunes.length)];
+    const vocal = vocales[Math.floor(Math.random() * vocales.length)];
+    return { consonante: grupo, vocal: vocal };
+  } else if (tipo < 0.66) {
+    // Sílaba con diptongo
+    const diptongo = diptongos[Math.floor(Math.random() * diptongos.length)];
+    const consonante = consonantesNormales[Math.floor(Math.random() * consonantesNormales.length)];
+    return { consonante: consonante, vocal: diptongo };
   } else {
-    const consonanteFinal = consonantesNormales[Math.floor(Math.random() * consonantesNormales.length)];
-    return { consonante: grupoConsonante, vocal: vocal + consonanteFinal }; // CCVC
+    // Palabra bisílaba
+    return { palabra: palabrasBisilabas[Math.floor(Math.random() * palabrasBisilabas.length)] };
   }
 };
-
-const palabrasCortas = ['sol', 'mar', 'luz', 'pan', 'flor', 'tren', 'pez', 'luna', 'casa', 'perro'];
-const frasesCortas = ['El sol brilla', 'La luna es blanca', 'El perro ladra', 'La flor es roja', 'El tren va rápido'];
 
 const MetodoLectura = () => {
   const [nivel, setNivel] = useState(1);
@@ -78,37 +83,53 @@ const MetodoLectura = () => {
     setColorConsonante(colores[Math.floor(Math.random() * colores.length)]);
   };
 
-  const generarContenido = () => {
-    let nuevoContenido;
-    switch(nivel) {
-      case 1:
-        nuevoContenido = generarSilabaSimple();
-        break;
-      case 2:
-        nuevoContenido = generarSilabaCompleja();
-        break;
-      case 3:
-        nuevoContenido = { palabra: palabrasCortas[Math.floor(Math.random() * palabrasCortas.length)] };
-        break;
-      case 4:
-        nuevoContenido = { frase: frasesCortas[Math.floor(Math.random() * frasesCortas.length)] };
-        break;
-      default:
-        nuevoContenido = generarSilabaSimple();
-    }
-    setContenido(nuevoContenido);
-    setColorConsonante(colores[Math.floor(Math.random() * colores.length)]);
-  };
+const generarContenido = () => {
+  let nuevoContenido;
+  switch(nivel) {
+    case 1:
+      nuevoContenido = generarSilabaSimple();
+      break;
+    case 2:
+      nuevoContenido = generarContenidoNivel2();
+      break;
+    case 3:
+      nuevoContenido = { palabra: palabrasCortas[Math.floor(Math.random() * palabrasCortas.length)] };
+      break;
+    case 4:
+      nuevoContenido = { frase: frasesCortas[Math.floor(Math.random() * frasesCortas.length)] };
+      break;
+    default:
+      nuevoContenido = generarSilabaSimple();
+  }
+  setContenido(nuevoContenido);
+  setColorConsonante(colores[Math.floor(Math.random() * colores.length)]);
+};
 
   useEffect(() => {
     generarContenido();
   }, [nivel]);
 
 const renderContenido = () => {
-  if ('palabra' in contenido) {
-    return <span style={{fontSize: '4rem'}}>{contenido.palabra}</span>;
-  } else if ('frase' in contenido) {
-    return <span style={{fontSize: '3rem'}}>{contenido.frase}</span>;
+  if ('frase' in contenido) {
+    return (
+      <span style={{fontSize: '3rem'}}>
+        {contenido.frase.split('').map((letra, index) => (
+          <span key={index} style={{color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante}}>
+            {letra}
+          </span>
+        ))}
+      </span>
+    );
+  } else if ('palabra' in contenido) {
+    return (
+      <span style={{fontSize: '4rem'}}>
+        {contenido.palabra.split('').map((letra, index) => (
+          <span key={index} style={{color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante}}>
+            {letra}
+          </span>
+        ))}
+      </span>
+    );
   } else {
     return (
       <>
