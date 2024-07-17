@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 
 const colores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'];
-
 const vocales = ['a', 'e', 'i', 'o', 'u'];
 const consonantes = ['m', 'p', 's', 't', 'l', 'n', 'd', 'f', 'ch', 'll', 'j', 'r', 'b', 'h', 'z', 'x', 'c', 'd', 'f', 'g', 'k', 'l', 'qu', 'v', 'y'];
 
@@ -29,18 +26,18 @@ const MetodoLectura = () => {
   }, []);
 
   return (
-    <Card className="w-96 mx-auto mt-10">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold text-center">Aprendamos a Leer</CardTitle>
-      </CardHeader>
-      <CardContent>
+    <div className="max-w-sm mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+      <div className="px-6 py-4">
+        <div className="font-bold text-xl mb-2 text-center">Aprendamos a Leer</div>
         <div className="text-center mb-6">
           <span style={{color: colorLetra1, fontSize: '8rem'}}>{silaba[0]}</span>
           <span style={{color: colorLetra2, fontSize: '8rem'}}>{silaba[1]}</span>
         </div>
-        <Button onClick={nuevaSilaba} className="w-full">Nueva Sílaba</Button>
-      </CardContent>
-    </Card>
+        <button onClick={nuevaSilaba} className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Nueva Sílaba
+        </button>
+      </div>
+    </div>
   );
 };
 
