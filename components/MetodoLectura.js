@@ -13,6 +13,11 @@ const combinacionesVC = [
   'az', 'ez', 'iz', 'oz', 'uz'
 ];
 
+const gruposConsonantesValidos = [
+  'bl', 'br', 'cl', 'cr', 'dr', 'fl', 'fr', 'gl', 'gr',
+  'pl', 'pr', 'tr', 'tl'
+];
+
 const generarSilabaSimple = () => {
   const randomNum = Math.random();
   
@@ -49,15 +54,14 @@ const generarSilabaSimple = () => {
 };
 
 const generarSilabaCompleja = () => {
-  const consonantes = [...consonantesNormales, ...consonantesEspeciales];
-  const c1 = consonantes[Math.floor(Math.random() * consonantes.length)];
-  const c2 = consonantes[Math.floor(Math.random() * consonantes.length)];
-  const v = vocales[Math.floor(Math.random() * vocales.length)];
+  const grupoConsonante = gruposConsonantesValidos[Math.floor(Math.random() * gruposConsonantesValidos.length)];
+  const vocal = vocales[Math.floor(Math.random() * vocales.length)];
   
-  if (Math.random() < 0.5) {
-    return { consonante: c1 + c2, vocal: v }; // CCV
+  if (Math.random() < 0.7) {
+    return { consonante: grupoConsonante, vocal: vocal }; // CCV
   } else {
-    return { consonante: c1 + c2, vocal: v + consonantes[Math.floor(Math.random() * consonantes.length)] }; // CCVC
+    const consonanteFinal = consonantesNormales[Math.floor(Math.random() * consonantesNormales.length)];
+    return { consonante: grupoConsonante, vocal: vocal + consonanteFinal }; // CCVC
   }
 };
 
@@ -100,20 +104,20 @@ const MetodoLectura = () => {
     generarContenido();
   }, [nivel]);
 
-  const renderContenido = () => {
-    if ('palabra' in contenido) {
-      return <span style={{fontSize: '4rem'}}>{contenido.palabra}</span>;
-    } else if ('frase' in contenido) {
-      return <span style={{fontSize: '3rem'}}>{contenido.frase}</span>;
-    } else {
-      return (
-        <>
-          <span style={{color: colorConsonante, fontSize: '8rem'}}>{contenido.consonante}</span>
-          <span style={{color: 'black', fontSize: '8rem'}}>{contenido.vocal}</span>
-        </>
-      );
-    }
-  };
+const renderContenido = () => {
+  if ('palabra' in contenido) {
+    return <span style={{fontSize: '4rem'}}>{contenido.palabra}</span>;
+  } else if ('frase' in contenido) {
+    return <span style={{fontSize: '3rem'}}>{contenido.frase}</span>;
+  } else {
+    return (
+      <>
+        <span style={{color: colorConsonante, fontSize: '8rem'}}>{contenido.consonante}</span>
+        <span style={{color: 'black', fontSize: '8rem'}}>{contenido.vocal}</span>
+      </>
+    );
+  }
+};
 
   return (
     <div className="max-w-sm mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
