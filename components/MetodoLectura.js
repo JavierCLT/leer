@@ -63,24 +63,24 @@ const MetodoLectura = () => {
   const [colorConsonante, setColorConsonante] = useState('');
 
   const generarContenido = () => {
-    let nuevoContenido;
+    let Siguiente;
     switch(nivel) {
       case 1:
-        nuevoContenido = generarSilabaSimple();
+        Siguiente = generarSilabaSimple();
         break;
       case 2:
-        nuevoContenido = generarContenidoNivel2();
+        Siguiente = generarContenidoNivel2();
         break;
       case 3:
-        nuevoContenido = { palabra: palabrasNivel3[Math.floor(Math.random() * palabrasNivel3.length)] };
+        Siguiente = { palabra: palabrasNivel3[Math.floor(Math.random() * palabrasNivel3.length)] };
         break;
       case 4:
-        nuevoContenido = { frase: frasesNivel4[Math.floor(Math.random() * frasesNivel4.length)] };
+        Siguiente = { frase: frasesNivel4[Math.floor(Math.random() * frasesNivel4.length)] };
         break;
       default:
-        nuevoContenido = generarSilabaSimple();
+        Siguiente = generarSilabaSimple();
     }
-    setContenido(nuevoContenido);
+    setContenido(Siguiente);
     setColorConsonante(colores[Math.floor(Math.random() * colores.length)]);
   };
 
@@ -142,7 +142,7 @@ const renderContenido = () => {
           {renderContenido()}
         </div>
         <button onClick={generarContenido} className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">
-          Nuevo Contenido
+          Siguiente
         </button>
         <div className="flex justify-between">
           {[1, 2, 3, 4].map((n) => (
