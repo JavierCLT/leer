@@ -130,28 +130,46 @@ const renderContenido = () => {
       key={index} 
       style={{
         color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante,
-        fontSize: nivel === 4 ? '3rem' : '6rem',
+        fontSize: nivel === 4 ? '4rem' : '6rem', // Aumentamos el tamaño para el nivel 4
         display: 'inline-block',
         fontWeight: 'bold',
-        textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
+        textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
+        margin: nivel === 4 ? '0 0.1rem' : '0' // Añadimos un pequeño margen en el nivel 4
       }}
     >
       {letra}
     </span>
   );
 
-  if ('frase' in contenido || 'palabra' in contenido) {
-    const texto = contenido.frase || contenido.palabra;
+  if ('frase' in contenido) {
     return (
       <div style={{
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
+        alignItems: 'center',
         gap: '0.5rem',
+        maxWidth: '100%',
+        overflowWrap: 'break-word',
+        minHeight: '12rem' // Aseguramos que haya suficiente espacio vertical
+      }}>
+        {contenido.frase.split(' ').map((palabra, idx) => (
+          <div key={idx} style={{display: 'flex', margin: '0 0.5rem'}}>
+            {palabra.split('').map(renderLetra)}
+          </div>
+        ))}
+      </div>
+    );
+  } else if ('palabra' in contenido) {
+    return (
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
         maxWidth: '100%',
         overflowWrap: 'break-word'
       }}>
-        {texto.split('').map(renderLetra)}
+        {contenido.palabra.split('').map(renderLetra)}
       </div>
     );
   } else if ('consonante' in contenido && 'vocal' in contenido) {
@@ -168,11 +186,11 @@ const renderContenido = () => {
 
 
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
-      <div className="px-6 py-8">
-        <div className="text-center mb-8 h-48 flex items-center justify-center">
-          {renderContenido()}
-        </div>
+    <div className="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+      <div className="px-8 py-10">
+  <div className="text-center mb-8 min-h-[12rem] flex items-center justify-center">
+    {renderContenido()}
+  </div>
         <button 
           onClick={generarContenido} 
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg mb-6 transition duration-300"
