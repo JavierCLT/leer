@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 const colores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'];
-const vocales = ['a', 'e', 'i', 'o', 'u'];
-const consonantesNormales = ['m', 'p', 's', 't', 'l', 'n', 'd', 'f', 'ch', 'll', 'j', 'r', 'b', 'h', 'z', 'x', 'c', 'd', 'f', 'g', 'k', 'l', 'v', 'y'];
-
-const generarSilaba = () => {
 const consonantesEspeciales = ['qu', 'gu', 'ch'];
 const consonantesNormales = ['m', 'p', 's', 't', 'l', 'n', 'd', 'f', 'j', 'r', 'b', 'h', 'x', 'c', 'v', 'y'];
 const vocales = ['a', 'e', 'i', 'o', 'u'];
