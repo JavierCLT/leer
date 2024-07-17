@@ -90,50 +90,60 @@ const generarContenidoNivel2 = () => {
 
 const MetodoLectura = () => {
   const [nivel, setNivel] = useState(1);
-  const [contenido, setContenido] = useState({ consonante: '', vocal: '' });
+  const [contenido, setContenido] = useState({ consonante: 'e', vocal: 'r' });
   const [colorConsonante, setColorConsonante] = useState('');
 
-  const generarContenido = () => {
-    let Siguiente;
+const generarContenido = () => {
+  let nuevoContenido;
+  try {
     switch(nivel) {
       case 1:
-        Siguiente = generarSilabaSimple();
+        nuevoContenido = generarSilabaSimple();
         break;
       case 2:
-        Siguiente = generarContenidoNivel2();
+        nuevoContenido = generarContenidoNivel2();
         break;
       case 3:
-        Siguiente = { palabra: palabrasNivel3[Math.floor(Math.random() * palabrasNivel3.length)] };
+        nuevoContenido = { palabra: palabrasNivel3[Math.floor(Math.random() * palabrasNivel3.length)] };
         break;
       case 4:
-        Siguiente = { frase: frasesNivel4[Math.floor(Math.random() * frasesNivel4.length)] };
+        nuevoContenido = { frase: frasesNivel4[Math.floor(Math.random() * frasesNivel4.length)] };
         break;
       default:
-        Siguiente = generarSilabaSimple();
+        nuevoContenido = generarSilabaSimple();
     }
-    setContenido(Siguiente);
-    setColorConsonante(colores[Math.floor(Math.random() * colores.length)]);
-  };
+  } catch (error) {
+    console.error("Error generando contenido:", error);
+    nuevoContenido = { consonante: 'e', vocal: 'r' }; // Valor por defecto en caso de error
+  }
+  
+  setContenido(nuevoContenido);
+  setColorConsonante(colores[Math.floor(Math.random() * colores.length)]);
+};
 
   useEffect(() => {
     generarContenido();
   }, [nivel]);
 
 const renderContenido = () => {
+  if (!contenido) {
+    return <span style={{fontSize: '6rem'}}>Error</span>;
+  }
+
   const renderLetra = (letra, index) => (
-  <span 
-    key={index} 
-    style={{
-      color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante,
-      fontSize: '6rem',  // Reducido de 8rem para mejor ajuste
-      display: 'inline-block',
-      fontWeight: 'bold',
-      textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
-    }}
-  >
-    {letra}
-  </span>
-);
+    <span 
+      key={index} 
+      style={{
+        color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante,
+        fontSize: '6rem',
+        display: 'inline-block',
+        fontWeight: 'bold',
+        textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
+      }}
+    >
+      {letra}
+    </span>
+  );
 
   if ('frase' in contenido) {
     return (
@@ -164,17 +174,15 @@ const renderContenido = () => {
         {contenido.palabra.split('').map(renderLetra)}
       </div>
     );
-  } else {
+  } else if ('consonante' in contenido && 'vocal' in contenido) {
     return (
       <>
-        {contenido.consonante.split('').map((letra, index) => (
-          <span key={index} style={{color: colorConsonante, fontSize: '8rem'}}>{letra}</span>
-        ))}
-        {contenido.vocal.split('').map((letra, index) => (
-          <span key={index} style={{color: 'black', fontSize: '8rem'}}>{letra}</span>
-        ))}
+        {contenido.consonante.split('').map((letra, index) => renderLetra(letra, 'c'+index))}
+        {contenido.vocal.split('').map((letra, index) => renderLetra(letra, 'v'+index))}
       </>
     );
+  } else {
+    return <span style={{fontSize: '6rem'}}>Error</span>;
   }
 };
 
