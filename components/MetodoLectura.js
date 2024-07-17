@@ -52,7 +52,6 @@ const MetodoLectura = () => {
   return (
     <div className="max-w-sm mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2 text-center">Aprendamos a Leer</div>
         <div className="text-center mb-6">
           <span style={{color: colorConsonante, fontSize: '8rem'}}>{silaba.consonante}</span>
           <span style={{color: 'black', fontSize: '8rem'}}>{silaba.vocal}</span>
