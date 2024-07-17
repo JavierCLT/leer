@@ -36,8 +36,8 @@ const MetodoLectura = () => {
     <div className="max-w-sm mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="px-6 py-4">
         <div className="text-center mb-6">
-          <span style={{color: colorLetra1, fontSize: '8rem'}}>{silaba[0]}</span>
-          <span style={{color: colorLetra2, fontSize: '8rem'}}>{silaba[1]}</span>
+          <span style={{color: colorLetra1, fontSize: '8rem'}}>{silaba.slice(0, -1)}</span>
+          <span style={{color: colorLetra2, fontSize: '8rem'}}>{silaba.slice(-1)}</span>
         </div>
         <button onClick={nuevaSilaba} className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Nueva Sílaba
