@@ -61,15 +61,15 @@ const MetodoLectura = () => {
     nuevaSilaba();
   }, []);
 
-  return (
+return (
   <div className="max-w-sm mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
     <div className="px-6 py-4">
       <div className="text-center mb-6">
-        {silaba.vocal === silaba.consonante[0] ? (
+        {combinacionesVC.includes(silaba.vocal + silaba.consonante) ? (
           // Para combinaciones VC
           <span style={{fontSize: '8rem'}}>
             <span style={{color: 'black'}}>{silaba.vocal}</span>
-            <span style={{color: colorConsonante}}>{silaba.consonante[1]}</span>
+            <span style={{color: colorConsonante}}>{silaba.consonante}</span>
           </span>
         ) : (
           // Para combinaciones CV normales
@@ -86,5 +86,4 @@ const MetodoLectura = () => {
   </div>
 );
 };
-
 export default MetodoLectura;
