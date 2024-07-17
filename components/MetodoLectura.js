@@ -5,7 +5,6 @@ import { frasesNivel4 } from './frases';
 const colores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'];
 const vocales = ['a', 'e', 'i', 'o', 'u'];
 
-
 const combinacionesDosLetras = {
   "vc": [
     "al", "as", "an", "ar", "el", "en", "es", "et", "il", "in", "is", "it", "ol", "on", "or", "os", "ot", "ul", "un", "ur"
@@ -53,30 +52,22 @@ const combinacionesTresLetras = {
   ]
 };
 
-
 const generarSilabaSimple = () => {
   const tipos = ['vc', 'cv'];
   const tipoAleatorio = tipos[Math.floor(Math.random() * tipos.length)];
   const combinacionAleatoria = combinacionesDosLetras[tipoAleatorio][Math.floor(Math.random() * combinacionesDosLetras[tipoAleatorio].length)];
-  
-  if (tipoAleatorio === 'vc') {
-    return {
-      consonante: combinacionAleatoria[1],
-      vocal: combinacionAleatoria[0]
-    };
-  } else { // cv
-    return {
-      consonante: combinacionAleatoria[0],
-      vocal: combinacionAleatoria[1]
-    };
-  }
+
+  return {
+    consonante: tipoAleatorio === 'vc' ? combinacionAleatoria[1] : combinacionAleatoria[0],
+    vocal: tipoAleatorio === 'vc' ? combinacionAleatoria[0] : combinacionAleatoria[1]
+  };
 };
 
 const generarContenidoNivel2 = () => {
   const categorias = Object.keys(combinacionesTresLetras);
   const categoriaAleatoria = categorias[Math.floor(Math.random() * categorias.length)];
   const combinacionAleatoria = combinacionesTresLetras[categoriaAleatoria][Math.floor(Math.random() * combinacionesTresLetras[categoriaAleatoria].length)];
-  
+
   return {
     consonante: combinacionAleatoria.slice(0, -1),
     vocal: combinacionAleatoria.slice(-1)
@@ -85,130 +76,125 @@ const generarContenidoNivel2 = () => {
 
 const MetodoLectura = () => {
   const [nivel, setNivel] = useState(1);
-  const [contenido, setContenido] = useState({ consonante: 'e', vocal: 'r' });
+  const [contenido, setContenido] = useState({});
   const [colorConsonante, setColorConsonante] = useState('');
 
-const generarContenido = () => {
-  let Siguiente;
-  try {
-    switch(nivel) {
-      case 1:
-        Siguiente = generarSilabaSimple();
-        break;
-      case 2:
-        Siguiente = generarContenidoNivel2();
-        break;
-      case 3:
-        Siguiente = { palabra: palabrasNivel3[Math.floor(Math.random() * palabrasNivel3.length)] };
-        break;
-      case 4:
-        Siguiente = { frase: frasesNivel4[Math.floor(Math.random() * frasesNivel4.length)] };
-        break;
-      default:
-        Siguiente = generarSilabaSimple();
+  const generarContenido = () => {
+    let siguiente;
+    try {
+      switch(nivel) {
+        case 1:
+          siguiente = generarSilabaSimple();
+          break;
+        case 2:
+          siguiente = generarContenidoNivel2();
+          break;
+        case 3:
+          siguiente = { palabra: palabrasNivel3[Math.floor(Math.random() * palabrasNivel3.length)] };
+          break;
+        case 4:
+          siguiente = { frase: frasesNivel4[Math.floor(Math.random() * frasesNivel4.length)] };
+          break;
+        default:
+          siguiente = generarSilabaSimple();
+      }
+    } catch (error) {
+      console.error("Error generando contenido:", error);
+      siguiente = { consonante: 'e', vocal: 'r' }; // Valor por defecto en caso de error
     }
-  } catch (error) {
-    console.error("Error generando contenido:", error);
-    Siguiente = { consonante: 'e', vocal: 'r' }; // Valor por defecto en caso de error
-  }
-  
-  setContenido(Siguiente);
-  setColorConsonante(colores[Math.floor(Math.random() * colores.length)]);
-};
+
+    setContenido(siguiente);
+    setColorConsonante(colores[Math.floor(Math.random() * colores.length)]);
+  };
 
   useEffect(() => {
     generarContenido();
   }, [nivel]);
 
-const renderContenido = () => {
-  if (!contenido) {
-    return <span style={{fontSize: '6rem'}}>Error</span>;
-  }
+  const renderContenido = () => {
+    if (!contenido) {
+      return <span style={{ fontSize: '6rem' }}>Error</span>;
+    }
 
-  const renderLetra = (letra, index, isLastInWord = false) => (
-    <span 
-      key={index} 
-      style={{
-        color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante,
-        fontSize: nivel === 4 ? '4rem' : '6rem',
-        display: 'inline-block',
-        fontWeight: 'bold',
-        textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
-        marginRight: isLastInWord && nivel === 4 ? '0.5rem' : '0'
-      }}
-    >
-      {letra}
-    </span>
-  );
+    const renderLetra = (letra, index, isLastInWord = false) => (
+      <span
+        key={index}
+        style={{
+          color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante,
+          fontSize: nivel === 4 ? '2.5rem' : '6rem',
+          display: 'inline-block',
+          fontWeight: 'bold',
+          textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
+          marginRight: isLastInWord && nivel === 4 ? '0.2rem' : '0'
+        }}
+      >
+        {letra}
+      </span>
+    );
 
-  if ('frase' in contenido) {
-    return (
-      <div style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: '0.5rem',
-        maxWidth: '100%',
-        overflowWrap: 'break-word',
-        minHeight: '12rem'
-      }}>
-        {contenido.frase.split(' ').map((palabra, idx) => (
-          <div key={idx} style={{display: 'flex', marginRight: '0.5rem'}}>
-            {palabra.split('').map((letra, letraIdx, arr) => 
-              renderLetra(letra, `${idx}-${letraIdx}`, letraIdx === arr.length - 1)
-            )}
-          </div>
-        ))}
-      </div>
-    );
-  } else if ('palabra' in contenido) {
-    return (
-      <div style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        maxWidth: '100%',
-        overflowWrap: 'break-word'
-      }}>
-        {contenido.palabra.split('').map(renderLetra)}
-      </div>
-    );
-  } else if ('consonante' in contenido && 'vocal' in contenido) {
-    return (
-      <>
-        {contenido.consonante.split('').map((letra, index) => renderLetra(letra, 'c'+index))}
-        {contenido.vocal.split('').map((letra, index) => renderLetra(letra, 'v'+index))}
-      </>
-    );
-  } else {
-    return <span style={{fontSize: '6rem'}}>Error</span>;
-  }
-};
-
+    if ('frase' in contenido) {
+      return (
+        <div style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '0.2rem',
+          maxWidth: '100%',
+          overflowWrap: 'break-word',
+          minHeight: '12rem'
+        }}>
+          {contenido.frase.split(' ').map((palabra, idx) => (
+            <div key={idx} style={{ display: 'flex', marginRight: '0.2rem' }}>
+              {palabra.split('').map((letra, letraIdx, arr) =>
+                renderLetra(letra, `${idx}-${letraIdx}`, letraIdx === arr.length - 1)
+              )}
+            </div>
+          ))}
+        </div>
+      );
+    } else if ('palabra' in contenido) {
+      return (
+        <div style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          maxWidth: '100%',
+          overflowWrap: 'break-word'
+        }}>
+          {contenido.palabra.split('').map(renderLetra)}
+        </div>
+      );
+    } else if ('consonante' in contenido && 'vocal' in contenido) {
+      return (
+        <>
+          {contenido.consonante.split('').map((letra, index) => renderLetra(letra, 'c' + index))}
+          {contenido.vocal.split('').map((letra, index) => renderLetra(letra, 'v' + index))}
+        </>
+      );
+    } else {
+      return <span style={{ fontSize: '6rem' }}>Error</span>;
+    }
+  };
 
   return (
     <div className="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="px-8 py-10">
-  <div className="text-center mb-8 min-h-[12rem] flex items-center justify-center">
-    {renderContenido()}
-  </div>
-        <button 
-          onClick={generarContenido} 
+        <div className="text-center mb-8 min-h-[12rem] flex items-center justify-center">
+          {renderContenido()}
+        </div>
+        <button
+          onClick={generarContenido}
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg mb-6 transition duration-300"
         >
           Siguiente
         </button>
         <div className="grid grid-cols-4 gap-2">
           {[1, 2, 3, 4].map((n) => (
-            <button 
-              key={n} 
-              onClick={() => setNivel(n)} 
-              className={`py-2 px-3 rounded-lg font-semibold transition duration-300 ${
-                nivel === n 
-                  ? 'bg-green-500 text-white' 
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
+            <button
+              key={n}
+              onClick={() => setNivel(n)}
+              className={`py-2 px-3 rounded-lg font-semibold transition duration-300 ${nivel === n ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
             >
               Nivel {n}
             </button>
@@ -218,4 +204,5 @@ const renderContenido = () => {
     </div>
   );
 };
+
 export default MetodoLectura;
