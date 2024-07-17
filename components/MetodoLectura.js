@@ -14,13 +14,15 @@ const combinacionesVC = [
 ];
 
 const generarSilaba = () => {
-  if (Math.random() < 0.2) { // 20% de probabilidad de generar una combinación vocal+consonante
+  const randomNum = Math.random();
+  
+  if (randomNum < 0.2) { // 20% de probabilidad de generar una combinación vocal+consonante
     const combinacion = combinacionesVC[Math.floor(Math.random() * combinacionesVC.length)];
     return { 
       consonante: combinacion[1], 
       vocal: combinacion[0]
     };
-  } else if (Math.random() < 0.3) { // ~24% de probabilidad de que salga una consonante especial o 'z'
+  } else if (randomNum < 0.44) { // ~24% de probabilidad de que salga una consonante especial o 'z'
     if (Math.random() < 0.8) { // 80% de este 24% para consonantes especiales
       const consonanteEspecial = consonantesEspeciales[Math.floor(Math.random() * consonantesEspeciales.length)];
       let vocal;
