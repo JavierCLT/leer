@@ -1,5 +1,4 @@
 import MetodoLectura from '../components/MetodoLectura'
-import '../styles/globals.css'
 
 export default function Home() {
   return (
