@@ -64,7 +64,7 @@ const generarSilabaSimple = () => {
       consonante: combinacionAleatoria[1],
       vocal: combinacionAleatoria[0]
     };
-  } else {
+  } else { // cv
     return {
       consonante: combinacionAleatoria[0],
       vocal: combinacionAleatoria[1]
