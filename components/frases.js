@@ -1,0 +1,22 @@
+export const frasesNivel4 = [
+  'El sol brilla',
+  'La luna es blanca',
+  'El perro ladra',
+  'El gato maulla',
+  'La flor es roja',
+  'El cielo es azul',
+  'La casa es grande',
+  'El árbol es alto',
+  'El pez nada',
+  'El pájaro vuela',
+  'La niña corre',
+  'El niño salta',
+  'La mesa es marrón',
+  'La silla es verde',
+  'El libro es nuevo',
+  'La puerta está abierta',
+  'La ventana está cerrada',
+  'El coche es rápido',
+  'La bici es pequeña',
+  'El tren es largo'
+];
