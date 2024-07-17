@@ -125,16 +125,16 @@ const renderContenido = () => {
     return <span style={{fontSize: '6rem'}}>Error</span>;
   }
 
-  const renderLetra = (letra, index) => (
+  const renderLetra = (letra, index, isLastInWord = false) => (
     <span 
       key={index} 
       style={{
         color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante,
-        fontSize: nivel === 4 ? '4rem' : '6rem', // Aumentamos el tamaño para el nivel 4
+        fontSize: nivel === 4 ? '4rem' : '6rem',
         display: 'inline-block',
         fontWeight: 'bold',
         textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
-        margin: nivel === 4 ? '0 0.1rem' : '0' // Añadimos un pequeño margen en el nivel 4
+        marginRight: isLastInWord && nivel === 4 ? '0.5rem' : '0'
       }}
     >
       {letra}
@@ -151,11 +151,13 @@ const renderContenido = () => {
         gap: '0.5rem',
         maxWidth: '100%',
         overflowWrap: 'break-word',
-        minHeight: '12rem' // Aseguramos que haya suficiente espacio vertical
+        minHeight: '12rem'
       }}>
         {contenido.frase.split(' ').map((palabra, idx) => (
-          <div key={idx} style={{display: 'flex', margin: '0 0.5rem'}}>
-            {palabra.split('').map(renderLetra)}
+          <div key={idx} style={{display: 'flex', marginRight: '0.5rem'}}>
+            {palabra.split('').map((letra, letraIdx, arr) => 
+              renderLetra(letra, `${idx}-${letraIdx}`, letraIdx === arr.length - 1)
+            )}
           </div>
         ))}
       </div>
