@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
 const colores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'];
-const vocales = ['a', 'e', 'i', 'o', 'u'];
-const consonantes = ['m', 'p', 's', 't', 'l', 'n', 'd', 'f', 'ch', 'll', 'j', 'r', 'b', 'h', 'z', 'x', 'c', 'd', 'f', 'g', 'k', 'l', 'qu', 'v', 'y'];
 
-const generarSilaba = () => {
-  const consonante = consonantes[Math.floor(Math.random() * consonantes.length)];
-  const vocal = vocales[Math.floor(Math.random() * vocales.length)];
-  return consonante + vocal;
+Copyconst generarSilaba = () => {
+  const consonantesNormales = ['m', 'p', 's', 't', 'l', 'n', 'd', 'f', 'ch', 'll', 'j', 'r', 'b', 'h', 'z', 'x', 'c', 'd', 'f', 'g', 'k', 'l', 'v', 'y'];
+  const vocales = ['a', 'e', 'i', 'o', 'u'];
+  
+  // Añadimos una probabilidad de que salga "qu"
+  if (Math.random() < 0.1) { // 10% de probabilidad de que salga "qu"
+    const vocalSinU = vocales.filter(v => v !== 'u');
+    return "qu" + vocalSinU[Math.floor(Math.random() * vocalSinU.length)];
+  } else {
+    const consonante = consonantesNormales[Math.floor(Math.random() * consonantesNormales.length)];
+    const vocal = vocales[Math.floor(Math.random() * vocales.length)];
+    return consonante + vocal;
+  }
 };
 
 const MetodoLectura = () => {
@@ -28,7 +35,6 @@ const MetodoLectura = () => {
   return (
     <div className="max-w-sm mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2 text-center">Aprendamos a Leer</div>
         <div className="text-center mb-6">
           <span style={{color: colorLetra1, fontSize: '8rem'}}>{silaba[0]}</span>
           <span style={{color: colorLetra2, fontSize: '8rem'}}>{silaba[1]}</span>
