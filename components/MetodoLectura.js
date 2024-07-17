@@ -30,7 +30,8 @@ const generarSilabaSimple = () => {
     };
   } else if (randomNum < 0.4) { // 20% de probabilidad de empezar con vocal
     const vocal = vocales[Math.floor(Math.random() * vocales.length)];
-    return { consonante: '', vocal: vocal };
+    const consonante = consonantesNormales[Math.floor(Math.random() * consonantesNormales.length)];
+    return { consonante: '', vocal: vocal + consonante };
   } else if (randomNum < 0.64) { // ~24% de probabilidad de que salga una consonante especial o 'z'
     // ... (mantén el código existente para consonantes especiales y 'z')
   } else {
@@ -40,6 +41,21 @@ const generarSilabaSimple = () => {
   }
 };
 
+const generarContenidoNivel2 = () => {
+  const tipo = Math.random();
+  
+  if (tipo < 0.5) {
+    // Sílaba con grupo consonántico
+    const grupo = gruposConsonantesComunes[Math.floor(Math.random() * gruposConsonantesComunes.length)];
+    const vocal = vocales[Math.floor(Math.random() * vocales.length)];
+    return { consonante: grupo, vocal: vocal };
+  } else {
+    // Sílaba con diptongo
+    const diptongo = diptongos[Math.floor(Math.random() * diptongos.length)];
+    const consonante = consonantesNormales[Math.floor(Math.random() * consonantesNormales.length)];
+    return { consonante: consonante, vocal: diptongo };
+  }
+};
 
 const MetodoLectura = () => {
   const [nivel, setNivel] = useState(1);
@@ -80,9 +96,34 @@ const renderContenido = () => {
   );
 
   if ('frase' in contenido) {
-    return <div style={{overflowX: 'auto', whiteSpace: 'nowrap', paddingBottom: '10px'}}>{contenido.frase.split('').map(renderLetra)}</div>;
+    return (
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        gap: '0.5rem',
+        maxWidth: '100%',
+        overflowWrap: 'break-word'
+      }}>
+        {contenido.frase.split(' ').map((palabra, idx) => (
+          <div key={idx} style={{display: 'flex'}}>
+            {palabra.split('').map(renderLetra)}
+          </div>
+        ))}
+      </div>
+    );
   } else if ('palabra' in contenido) {
-    return <div>{contenido.palabra.split('').map(renderLetra)}</div>;
+    return (
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        maxWidth: '100%',
+        overflowWrap: 'break-word'
+      }}>
+        {contenido.palabra.split('').map(renderLetra)}
+      </div>
+    );
   } else {
     return (
       <>
@@ -93,29 +134,9 @@ const renderContenido = () => {
   }
 };
 
-const generarContenidoNivel2 = () => {
-  const tipo = Math.random();
-  
-  if (tipo < 0.33) {
-    // Sílaba con grupo consonántico
-    const grupo = gruposConsonantesComunes[Math.floor(Math.random() * gruposConsonantesComunes.length)];
-    const vocal = vocales[Math.floor(Math.random() * vocales.length)];
-    return { consonante: grupo, vocal: vocal };
-  } else if (tipo < 0.66) {
-    // Sílaba con diptongo
-    const diptongo = diptongos[Math.floor(Math.random() * diptongos.length)];
-    const consonante = Math.random() < 0.2 ? '' : consonantesNormales[Math.floor(Math.random() * consonantesNormales.length)];
-    return { consonante: consonante, vocal: diptongo };
-  } else {
-    // Sílaba compleja de 3 letras
-    const consonante = consonantesNormales[Math.floor(Math.random() * consonantesNormales.length)];
-    const diptongo = diptongos[Math.floor(Math.random() * diptongos.length)];
-    return { consonante: consonante, vocal: diptongo };
-  }
-};
 
   return (
-    <div className="max-w-sm mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className="max-w-full mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden p-4">
       <div className="px-6 py-4">
         <div className="text-center mb-6">
           {renderContenido()}
