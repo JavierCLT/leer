@@ -13,7 +13,7 @@ const combinacionesVC = [
   'az', 'ez', 'iz', 'oz', 'uz'
 ];
 
-const generarSilaba = () => {
+const generarSilabaSimple = () => {
   const randomNum = Math.random();
   
   if (randomNum < 0.2) { // 20% de probabilidad de generar una combinación vocal+consonante
@@ -48,8 +48,25 @@ const generarSilaba = () => {
   }
 };
 
+const generarSilabaCompleja = () => {
+  const consonantes = [...consonantesNormales, ...consonantesEspeciales];
+  const c1 = consonantes[Math.floor(Math.random() * consonantes.length)];
+  const c2 = consonantes[Math.floor(Math.random() * consonantes.length)];
+  const v = vocales[Math.floor(Math.random() * vocales.length)];
+  
+  if (Math.random() < 0.5) {
+    return { consonante: c1 + c2, vocal: v }; // CCV
+  } else {
+    return { consonante: c1 + c2, vocal: v + consonantes[Math.floor(Math.random() * consonantes.length)] }; // CCVC
+  }
+};
+
+const palabrasCortas = ['sol', 'mar', 'luz', 'pan', 'flor', 'tren', 'pez', 'luna', 'casa', 'perro'];
+const frasesCortas = ['El sol brilla', 'La luna es blanca', 'El perro ladra', 'La flor es roja', 'El tren va rápido'];
+
 const MetodoLectura = () => {
-  const [silaba, setSilaba] = useState({ consonante: '', vocal: '' });
+  const [nivel, setNivel] = useState(1);
+  const [contenido, setContenido] = useState({ consonante: '', vocal: '' });
   const [colorConsonante, setColorConsonante] = useState('');
 
   const nuevaSilaba = () => {
@@ -57,33 +74,69 @@ const MetodoLectura = () => {
     setColorConsonante(colores[Math.floor(Math.random() * colores.length)]);
   };
 
-  useEffect(() => {
-    nuevaSilaba();
-  }, []);
+  const generarContenido = () => {
+    let nuevoContenido;
+    switch(nivel) {
+      case 1:
+        nuevoContenido = generarSilabaSimple();
+        break;
+      case 2:
+        nuevoContenido = generarSilabaCompleja();
+        break;
+      case 3:
+        nuevoContenido = { palabra: palabrasCortas[Math.floor(Math.random() * palabrasCortas.length)] };
+        break;
+      case 4:
+        nuevoContenido = { frase: frasesCortas[Math.floor(Math.random() * frasesCortas.length)] };
+        break;
+      default:
+        nuevoContenido = generarSilabaSimple();
+    }
+    setContenido(nuevoContenido);
+    setColorConsonante(colores[Math.floor(Math.random() * colores.length)]);
+  };
 
-return (
-  <div className="max-w-sm mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
-    <div className="px-6 py-4">
-      <div className="text-center mb-6">
-        {combinacionesVC.includes(silaba.vocal + silaba.consonante) ? (
-          // Para combinaciones VC
-          <span style={{fontSize: '8rem'}}>
-            <span style={{color: 'black'}}>{silaba.vocal}</span>
-            <span style={{color: colorConsonante}}>{silaba.consonante}</span>
-          </span>
-        ) : (
-          // Para combinaciones CV normales
-          <>
-            <span style={{color: colorConsonante, fontSize: '8rem'}}>{silaba.consonante}</span>
-            <span style={{color: 'black', fontSize: '8rem'}}>{silaba.vocal}</span>
-          </>
-        )}
+  useEffect(() => {
+    generarContenido();
+  }, [nivel]);
+
+  const renderContenido = () => {
+    if ('palabra' in contenido) {
+      return <span style={{fontSize: '4rem'}}>{contenido.palabra}</span>;
+    } else if ('frase' in contenido) {
+      return <span style={{fontSize: '3rem'}}>{contenido.frase}</span>;
+    } else {
+      return (
+        <>
+          <span style={{color: colorConsonante, fontSize: '8rem'}}>{contenido.consonante}</span>
+          <span style={{color: 'black', fontSize: '8rem'}}>{contenido.vocal}</span>
+        </>
+      );
+    }
+  };
+
+  return (
+    <div className="max-w-sm mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+      <div className="px-6 py-4">
+        <div className="text-center mb-6">
+          {renderContenido()}
+        </div>
+        <button onClick={generarContenido} className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">
+          Nuevo Contenido
+        </button>
+        <div className="flex justify-between">
+          {[1, 2, 3, 4].map((n) => (
+            <button 
+              key={n} 
+              onClick={() => setNivel(n)} 
+              className={`px-4 py-2 rounded ${nivel === n ? 'bg-green-500' : 'bg-gray-300'}`}
+            >
+              Nivel {n}
+            </button>
+          ))}
+        </div>
       </div>
-      <button onClick={nuevaSilaba} className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        Nueva Sílaba
-      </button>
     </div>
-  </div>
-);
+  );
 };
 export default MetodoLectura;
