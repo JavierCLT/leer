@@ -89,30 +89,30 @@ const MetodoLectura = () => {
   const [colorConsonante, setColorConsonante] = useState('');
 
 const generarContenido = () => {
-  let nuevoContenido;
+  let Siguiente;
   try {
     switch(nivel) {
       case 1:
-        nuevoContenido = generarSilabaSimple();
+        Siguiente = generarSilabaSimple();
         break;
       case 2:
-        nuevoContenido = generarContenidoNivel2();
+        Siguiente = generarContenidoNivel2();
         break;
       case 3:
-        nuevoContenido = { palabra: palabrasNivel3[Math.floor(Math.random() * palabrasNivel3.length)] };
+        Siguiente = { palabra: palabrasNivel3[Math.floor(Math.random() * palabrasNivel3.length)] };
         break;
       case 4:
-        nuevoContenido = { frase: frasesNivel4[Math.floor(Math.random() * frasesNivel4.length)] };
+        Siguiente = { frase: frasesNivel4[Math.floor(Math.random() * frasesNivel4.length)] };
         break;
       default:
-        nuevoContenido = generarSilabaSimple();
+        Siguiente = generarSilabaSimple();
     }
   } catch (error) {
     console.error("Error generando contenido:", error);
-    nuevoContenido = { consonante: 'e', vocal: 'r' }; // Valor por defecto en caso de error
+    Siguiente = { consonante: 'e', vocal: 'r' }; // Valor por defecto en caso de error
   }
   
-  setContenido(nuevoContenido);
+  setContenido(Siguiente);
   setColorConsonante(colores[Math.floor(Math.random() * colores.length)]);
 };
 
@@ -177,7 +177,7 @@ const renderContenido = () => {
           onClick={generarContenido} 
           className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg mb-6 transition duration-300"
         >
-          Nuevo Contenido
+          Siguiente
         </button>
         <div className="grid grid-cols-4 gap-2">
           {[1, 2, 3, 4].map((n) => (
