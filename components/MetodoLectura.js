@@ -4,16 +4,7 @@ import { frasesNivel4 } from './frases';
 
 const colores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'];
 const vocales = ['a', 'e', 'i', 'o', 'u'];
-const consonantesEspeciales = ['qu', 'gu', 'ch'];
-const consonantesNormales = ['m', 'p', 's', 't', 'l', 'n', 'd', 'f', 'j', 'r', 'b', 'h', 'x', 'c', 'v', 'y'];
-const combinacionesVC = [
-  'an', 'en', 'in', 'on', 'un',
-  'as', 'es', 'is', 'os', 'us',
-  'al', 'el', 'il', 'ol', 'ul',
-  'ar', 'er', 'ir', 'or', 'ur',
-  'ad', 'ed', 'id', 'ud',
-  'az', 'ez', 'iz', 'oz', 'uz'
-];
+
 
 const combinacionesDosLetras = {
   "vc": [
@@ -62,41 +53,22 @@ const combinacionesTresLetras = {
   ]
 };
 
-const gruposConsonantesComunes = ['br', 'bl', 'cr', 'cl', 'dr', 'fl', 'fr', 'gr', 'gl', 'pr', 'pl', 'tr'];
-const diptongos = ['ia', 'ie', 'io', 'iu', 'ai', 'ei', 'oi', 'ui', 'au', 'eu', 'ou'];
-const palabrasBisilabas = ['casa', 'perro', 'mesa', 'silla', 'libro', 'árbol', 'pato', 'gato', 'oso', 'ala', 'uva', 'isla', 'nube', 'rosa', 'pera'];
 
 const generarSilabaSimple = () => {
-  const tipos = Object.keys(combinacionesDosLetras);
+  const tipos = ['vc', 'cv'];
   const tipoAleatorio = tipos[Math.floor(Math.random() * tipos.length)];
   const combinacionAleatoria = combinacionesDosLetras[tipoAleatorio][Math.floor(Math.random() * combinacionesDosLetras[tipoAleatorio].length)];
   
-  switch(tipoAleatorio) {
-    case 'vc':
-      return {
-        consonante: combinacionAleatoria[1],
-        vocal: combinacionAleatoria[0]
-      };
-    case 'cv':
-      return {
-        consonante: combinacionAleatoria[0],
-        vocal: combinacionAleatoria[1]
-      };
-    case 'vv':
-      return {
-        consonante: '',
-        vocal: combinacionAleatoria
-      };
-    case 'cc':
-      return {
-        consonante: combinacionAleatoria,
-        vocal: vocales[Math.floor(Math.random() * vocales.length)]
-      };
-    default:
-      return {
-        consonante: 'e',
-        vocal: 'r'
-      };
+  if (tipoAleatorio === 'vc') {
+    return {
+      consonante: combinacionAleatoria[1],
+      vocal: combinacionAleatoria[0]
+    };
+  } else {
+    return {
+      consonante: combinacionAleatoria[0],
+      vocal: combinacionAleatoria[1]
+    };
   }
 };
 
@@ -105,17 +77,10 @@ const generarContenidoNivel2 = () => {
   const categoriaAleatoria = categorias[Math.floor(Math.random() * categorias.length)];
   const combinacionAleatoria = combinacionesTresLetras[categoriaAleatoria][Math.floor(Math.random() * combinacionesTresLetras[categoriaAleatoria].length)];
   
-  if (categoriaAleatoria === 'vcv' || categoriaAleatoria === 'cvv') {
-    return {
-      consonante: combinacionAleatoria.slice(0, 2),
-      vocal: combinacionAleatoria.slice(2)
-    };
-  } else {
-    return {
-      consonante: combinacionAleatoria.slice(0, -1),
-      vocal: combinacionAleatoria.slice(-1)
-    };
-  }
+  return {
+    consonante: combinacionAleatoria.slice(0, -1),
+    vocal: combinacionAleatoria.slice(-1)
+  };
 };
 
 const MetodoLectura = () => {
@@ -165,7 +130,7 @@ const renderContenido = () => {
       key={index} 
       style={{
         color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante,
-        fontSize: '6rem',
+        fontSize: nivel === 4 ? '3rem' : '6rem',
         display: 'inline-block',
         fontWeight: 'bold',
         textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
@@ -175,7 +140,8 @@ const renderContenido = () => {
     </span>
   );
 
-  if ('frase' in contenido) {
+  if ('frase' in contenido || 'palabra' in contenido) {
+    const texto = contenido.frase || contenido.palabra;
     return (
       <div style={{
         display: 'flex',
@@ -185,23 +151,7 @@ const renderContenido = () => {
         maxWidth: '100%',
         overflowWrap: 'break-word'
       }}>
-        {contenido.frase.split(' ').map((palabra, idx) => (
-          <div key={idx} style={{display: 'flex'}}>
-            {palabra.split('').map(renderLetra)}
-          </div>
-        ))}
-      </div>
-    );
-  } else if ('palabra' in contenido) {
-    return (
-      <div style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        maxWidth: '100%',
-        overflowWrap: 'break-word'
-      }}>
-        {contenido.palabra.split('').map(renderLetra)}
+        {texto.split('').map(renderLetra)}
       </div>
     );
   } else if ('consonante' in contenido && 'vocal' in contenido) {
