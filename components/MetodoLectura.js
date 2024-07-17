@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { palabrasNivel3 } from './palabras';
+import { frasesNivel4 } from './frases';
 
 const colores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'];
 const vocales = ['a', 'e', 'i', 'o', 'u'];
@@ -16,20 +18,6 @@ const combinacionesVC = [
 const gruposConsonantesComunes = ['br', 'bl', 'cr', 'cl', 'dr', 'fl', 'fr', 'gr', 'gl', 'pr', 'pl', 'tr'];
 const diptongos = ['ia', 'ie', 'io', 'iu', 'ai', 'ei', 'oi', 'ui', 'au', 'eu', 'ou'];
 const palabrasBisilabas = ['casa', 'perro', 'mesa', 'silla', 'libro', 'árbol', 'pato', 'gato', 'oso', 'ala', 'uva', 'isla', 'nube', 'rosa', 'pera'];
-export const palabrasNivel3 = [
-  'casa', 'perro', 'gato', 'árbol', 'flor', 'sol', 'luna', 'estrella',
-  'agua', 'fuego', 'tierra', 'aire', 'libro', 'mesa', 'silla', 'cama',
-  'puerta', 'ventana', 'coche', 'bici', 'tren', 'avión', 'barco', 'pez',
-  'pájaro', 'mano', 'pie', 'ojo', 'nariz', 'boca', 'oreja', 'diente',
-  'pelo', 'brazo', 'pierna', 'dedo', 'uña', 'corazón', 'cerebro', 'hueso',
-  'rojo', 'azul', 'verde', 'amarillo', 'blanco', 'negro', 'rosa', 'naranja',
-  'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez'
-];
-export const frasesNivel4 = [
-  'El sol brilla', 'La luna es blanca', 'El perro ladra', 'El gato maulla', 'La flor es roja', 'El cielo es azul', 'La casa es grande', 'El árbol es alto', 'El pez nada',
-  'El pájaro vuela', 'La niña corre', 'El niño salta', 'La mesa es marrón', 'La silla es verde', 'El libro es nuevo', 'La puerta está abierta', 'La ventana está cerrada',
-  'El coche es rápido', 'La bici es pequeña', 'El tren es largo'
-];
 
 const generarSilabaSimple = () => {
   const randomNum = Math.random();
@@ -66,6 +54,59 @@ const generarSilabaSimple = () => {
   }
 };
 
+
+const MetodoLectura = () => {
+  const [nivel, setNivel] = useState(1);
+  const [contenido, setContenido] = useState({ consonante: '', vocal: '' });
+  const [colorConsonante, setColorConsonante] = useState('');
+
+  const generarContenido = () => {
+    let nuevoContenido;
+    switch(nivel) {
+      case 1:
+        nuevoContenido = generarSilabaSimple();
+        break;
+      case 2:
+        nuevoContenido = generarContenidoNivel2();
+        break;
+      case 3:
+        nuevoContenido = { palabra: palabrasNivel3[Math.floor(Math.random() * palabrasNivel3.length)] };
+        break;
+      case 4:
+        nuevoContenido = { frase: frasesNivel4[Math.floor(Math.random() * frasesNivel4.length)] };
+        break;
+      default:
+        nuevoContenido = generarSilabaSimple();
+    }
+    setContenido(nuevoContenido);
+    setColorConsonante(colores[Math.floor(Math.random() * colores.length)]);
+  };
+
+  useEffect(() => {
+    generarContenido();
+  }, [nivel]);
+
+  const renderContenido = () => {
+    const renderLetra = (letra, index) => (
+      <span key={index} style={{color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante, fontSize: '8rem'}}>
+        {letra}
+      </span>
+    );
+
+    if ('frase' in contenido) {
+      return <div>{contenido.frase.split('').map(renderLetra)}</div>;
+    } else if ('palabra' in contenido) {
+      return <div>{contenido.palabra.split('').map(renderLetra)}</div>;
+    } else {
+      return (
+        <>
+          <span style={{color: colorConsonante, fontSize: '8rem'}}>{contenido.consonante}</span>
+          <span style={{color: 'black', fontSize: '8rem'}}>{contenido.vocal}</span>
+        </>
+      );
+    }
+  };
+
 const generarContenidoNivel2 = () => {
   const tipo = Math.random();
   
@@ -85,62 +126,6 @@ const generarContenidoNivel2 = () => {
   }
 };
 
-const MetodoLectura = () => {
-  const [nivel, setNivel] = useState(1);
-  const [contenido, setContenido] = useState({ consonante: '', vocal: '' });
-  const [colorConsonante, setColorConsonante] = useState('');
-
-  const nuevaSilaba = () => {
-    setSilaba(generarSilaba());
-    setColorConsonante(colores[Math.floor(Math.random() * colores.length)]);
-  };
-
-const generarContenido = () => {
-  let nuevoContenido;
-  switch(nivel) {
-    case 1:
-      nuevoContenido = generarSilabaSimple();
-      break;
-    case 2:
-      nuevoContenido = generarContenidoNivel2();
-      break;
-    case 3:
-      nuevoContenido = { palabra: palabrasCortas[Math.floor(Math.random() * palabrasCortas.length)] };
-      break;
-    case 4:
-      nuevoContenido = { frase: frasesCortas[Math.floor(Math.random() * frasesCortas.length)] };
-      break;
-    default:
-      nuevoContenido = generarSilabaSimple();
-  }
-  setContenido(nuevoContenido);
-  setColorConsonante(colores[Math.floor(Math.random() * colores.length)]);
-};
-
-  useEffect(() => {
-    generarContenido();
-  }, [nivel]);
-
-const renderContenido = () => {
-  const renderLetra = (letra, index) => (
-    <span key={index} style={{color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante, fontSize: '8rem'}}>
-      {letra}
-    </span>
-  );
-
-  if ('frase' in contenido) {
-    return <div>{contenido.frase.split('').map(renderLetra)}</div>;
-  } else if ('palabra' in contenido) {
-    return <div>{contenido.palabra.split('').map(renderLetra)}</div>;
-  } else {
-    return (
-      <>
-        <span style={{color: colorConsonante, fontSize: '8rem'}}>{contenido.consonante}</span>
-        <span style={{color: 'black', fontSize: '8rem'}}>{contenido.vocal}</span>
-      </>
-    );
-  }
-};
   return (
     <div className="max-w-sm mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="px-6 py-4">
