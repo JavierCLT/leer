@@ -169,7 +169,6 @@ const renderContenido = () => {
 
   return (
     <div className="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
-      <h1 className="text-2xl font-bold text-center py-4 bg-gray-100">Leyendo sílabas en español</h1>
       <div className="px-6 py-8">
         <div className="text-center mb-8 h-48 flex items-center justify-center">
           {renderContenido()}
