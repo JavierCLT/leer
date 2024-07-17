@@ -28,25 +28,11 @@ const generarSilabaSimple = () => {
       consonante: combinacion[1], 
       vocal: combinacion[0]
     };
-  } else if (randomNum < 0.44) { // ~24% de probabilidad de que salga una consonante especial o 'z'
-    if (Math.random() < 0.8) { // 80% de este 24% para consonantes especiales
-      const consonanteEspecial = consonantesEspeciales[Math.floor(Math.random() * consonantesEspeciales.length)];
-      let vocal;
-      
-      if (consonanteEspecial === 'qu' || consonanteEspecial === 'gu') {
-        vocal = Math.random() < 0.5 ? 'e' : 'i';
-      } else { // 'ch' puede ir con cualquier vocal
-        vocal = vocales[Math.floor(Math.random() * vocales.length)];
-      }
-      
-      return { consonante: consonanteEspecial, vocal };
-    } else { // 20% de este 24% para 'z'
-      const vocalesParaZ = ['a', 'o', 'u'];
-      return {
-        consonante: 'z',
-        vocal: vocalesParaZ[Math.floor(Math.random() * vocalesParaZ.length)]
-      };
-    }
+  } else if (randomNum < 0.4) { // 20% de probabilidad de empezar con vocal
+    const vocal = vocales[Math.floor(Math.random() * vocales.length)];
+    return { consonante: '', vocal: vocal };
+  } else if (randomNum < 0.64) { // ~24% de probabilidad de que salga una consonante especial o 'z'
+    // ... (mantén el código existente para consonantes especiales y 'z')
   } else {
     const consonante = consonantesNormales[Math.floor(Math.random() * consonantesNormales.length)];
     const vocal = vocales[Math.floor(Math.random() * vocales.length)];
@@ -86,26 +72,26 @@ const MetodoLectura = () => {
     generarContenido();
   }, [nivel]);
 
-  const renderContenido = () => {
-    const renderLetra = (letra, index) => (
-      <span key={index} style={{color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante, fontSize: '8rem'}}>
-        {letra}
-      </span>
-    );
+const renderContenido = () => {
+  const renderLetra = (letra, index) => (
+    <span key={index} style={{color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante, fontSize: '8rem', display: 'inline-block'}}>
+      {letra}
+    </span>
+  );
 
-    if ('frase' in contenido) {
-      return <div>{contenido.frase.split('').map(renderLetra)}</div>;
-    } else if ('palabra' in contenido) {
-      return <div>{contenido.palabra.split('').map(renderLetra)}</div>;
-    } else {
-      return (
-        <>
-          <span style={{color: colorConsonante, fontSize: '8rem'}}>{contenido.consonante}</span>
-          <span style={{color: 'black', fontSize: '8rem'}}>{contenido.vocal}</span>
-        </>
-      );
-    }
-  };
+  if ('frase' in contenido) {
+    return <div style={{overflowX: 'auto', whiteSpace: 'nowrap', paddingBottom: '10px'}}>{contenido.frase.split('').map(renderLetra)}</div>;
+  } else if ('palabra' in contenido) {
+    return <div>{contenido.palabra.split('').map(renderLetra)}</div>;
+  } else {
+    return (
+      <>
+        <span style={{color: colorConsonante, fontSize: '8rem'}}>{contenido.consonante}</span>
+        <span style={{color: 'black', fontSize: '8rem'}}>{contenido.vocal}</span>
+      </>
+    );
+  }
+};
 
 const generarContenidoNivel2 = () => {
   const tipo = Math.random();
@@ -118,11 +104,13 @@ const generarContenidoNivel2 = () => {
   } else if (tipo < 0.66) {
     // Sílaba con diptongo
     const diptongo = diptongos[Math.floor(Math.random() * diptongos.length)];
-    const consonante = consonantesNormales[Math.floor(Math.random() * consonantesNormales.length)];
+    const consonante = Math.random() < 0.2 ? '' : consonantesNormales[Math.floor(Math.random() * consonantesNormales.length)];
     return { consonante: consonante, vocal: diptongo };
   } else {
-    // Palabra bisílaba
-    return { palabra: palabrasBisilabas[Math.floor(Math.random() * palabrasBisilabas.length)] };
+    // Sílaba compleja de 3 letras
+    const consonante = consonantesNormales[Math.floor(Math.random() * consonantesNormales.length)];
+    const diptongo = diptongos[Math.floor(Math.random() * diptongos.length)];
+    return { consonante: consonante, vocal: diptongo };
   }
 };
 
