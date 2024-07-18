@@ -7,7 +7,7 @@ const vocales = ['a', 'e', 'i', 'o', 'u'];
 
 const combinacionesDosLetras = {
   "vc": [
-    "al", "as", "an", "ar", "el", "en", "es", "et", "il", "in", "is", "it", "ol", "on", "or", "os", "ot", "ul", "un", "ur"
+    "al", "as", "an", "ar", "el", "am", "en", "es", "et", "il", "in", "is", "it", "ol", "on", "or", "os", "ot", "ul", "un", "ur"
   ],
   "cv": [
     "ba", "be", "bi", "bo", "bu", "ca", "ce", "ci", "co", "cu", "da", "de", "di", "do", "du", "fa", "fe", "fi", "fo", "fu",
