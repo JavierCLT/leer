@@ -7,11 +7,11 @@ const vocales = ['a', 'e', 'i', 'o', 'u'];
 
 const combinacionesDosLetras = {
 vc: [
-    'ab', 'ad', 'ag', 'al', 'am', 'an', 'ar', 'as',
-    'eb', 'ed', 'el', 'em', 'en', 'er', 'es',
-    'ib', 'id', 'il', 'im', 'in', 'ir', 'is',
-    'ob', 'od', 'ol', 'om', 'on', 'or', 'os',
-    'ub', 'ud', 'ul', 'um', 'un', 'ur', 'us'
+    'al', 'an', 'ar', 'as',
+    'el', 'em', 'en', 'er', 'es',
+    'id','im', 'in', 'ir', 'is',
+    'ob', 'ol', 'om', 'on', 'or', 'os',
+    'ul', 'un', 'ur'
   ],
   cv: 
     [
