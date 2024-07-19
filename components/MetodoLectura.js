@@ -6,39 +6,39 @@ const colores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'];
 const vocales = ['a', 'e', 'i', 'o', 'u'];
 
 const combinacionesDosLetras = {
-  "vc": [
-    "ab", "ad", "ag", "al", "am", "an", "ar", "as",
-    "eb", "ed", "el", "em", "en", "er", "es",
-    "ib", "id", "il", "im", "in", "ir", "is",
-    "ob", "od", "ol", "om", "on", "or", "os",
-    "ub", "ud", "ul", "um", "un", "ur", "us"
-  ]
-  "cv": 
+vc: [
+    'ab', 'ad', 'ag', 'al', 'am', 'an', 'ar', 'as',
+    'eb', 'ed', 'el', 'em', 'en', 'er', 'es',
+    'ib', 'id', 'il', 'im', 'in', 'ir', 'is',
+    'ob', 'od', 'ol', 'om', 'on', 'or', 'os',
+    'ub', 'ud', 'ul', 'um', 'un', 'ur', 'us'
+  ],
+  cv: 
     [
-    "ba", "be", "bi", "bo", "bu",
-    "ca", "ce", "ci", "co", "cu",
-    "da", "de", "di", "do", "du",
-    "fa", "fe", "fi", "fo", "fu",
-    "ga", "ge", "gi", "go", "gu",
-    "ja", "je", "ji", "jo", "ju",
-    "ka", "ke", "ki", "ko", "ku",
-    "la", "le", "li", "lo", "lu",
-    "ma", "me", "mi", "mo", "mu",
-    "na", "ne", "ni", "no", "nu",
-    "pa", "pe", "pi", "po", "pu",
-    "que", "qui",
-    "ra", "re", "ri", "ro", "ru",
-    "sa", "se", "si", "so", "su",
-    "ta", "te", "ti", "to", "tu",
-    "va", "ve", "vi", "vo", "vu",
-    "wa", "we", "wi", "wo", "wu",
-    "xa", "xe", "xi", "xo", "xu",
-    "ya", "ye", "yi", "yo", "yu",
-    "za", "ce", "ci", "zo", "zu"
+    'ba', 'be', 'bi', 'bo', 'bu',
+    'ca', 'ce', 'ci', 'co', 'cu',
+    'da', 'de', 'di', 'do', 'du',
+    'fa', 'fe', 'fi', 'fo', 'fu',
+    'ga', 'ge', 'gi', 'go', 'gu',
+    'ja', 'je', 'ji', 'jo', 'ju',
+    'ka', 'ke', 'ki', 'ko', 'ku',
+    'la', 'le', 'li', 'lo', 'lu',
+    'ma', 'me', 'mi', 'mo', 'mu',
+    'na', 'ne', 'ni', 'no', 'nu',
+    'pa', 'pe', 'pi', 'po', 'pu',
+    'que', 'qui',
+    'ra', 're', 'ri', 'ro', 'ru',
+    'sa', 'se', 'si', 'so', 'su',
+    'ta', 'te', 'ti', 'to', 'tu',
+    'va', 've', 'vi', 'vo', 'vu',
+    'wa', 'we', 'wi', 'wo', 'wu',
+    'xa', 'xe', 'xi', 'xo', 'xu',
+    'ya', 'ye', 'yi', 'yo', 'yu',
+    'za', 'ce', 'ci', 'zo', 'zu'
   ],
   
-  "vv": [
-    "ai", "au", "ei", "eu", "ia", "ie", "io", "iu", "oi", "ou", "ua", "ue", "ui", "uo"
+  vv: [
+    'ai', 'au', 'ei', 'eu', 'ia', 'ie', 'io', 'iu', 'oi', 'ou', 'ua', 'ue', 'ui', 'uo'
   ],
   
 };
