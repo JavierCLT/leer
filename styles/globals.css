@@ -15,6 +15,10 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
@@ -27,41 +31,41 @@ h1 {
 
 /* Larger font sizes */
 .text-xl {
-  font-size: 5rem; /* 64px */
+  font-size: 7rem; /* 64px */
 }
 
 .text-2xl {
-  font-size: 5.5rem; /* 72px */
+  font-size: 7.5rem; /* 72px */
 }
 
 .text-3xl {
-  font-size: 6rem; /* 80px */
+  font-size: 7rem; /* 80px */
 }
 
 @media (max-width: 768px) {
   .text-xl {
-    font-size: 4rem; /* 48px */
+    font-size: 6rem; /* 48px */
   }
 
   .text-2xl {
-    font-size: 4.5rem; /* 56px */
+    font-size: 6.5rem; /* 56px */
   }
 
   .text-3xl {
-    font-size: 5rem; /* 64px */
+    font-size: 6rem; /* 64px */
   }
 }
 
 @media (max-width: 480px) {
   .text-xl {
-    font-size: 3.5rem; /* 40px */
+    font-size: 7.5rem; /* 40px */
   }
 
   .text-2xl {
-    font-size: 4rem; /* 48px */
+    font-size: 6rem; /* 48px */
   }
 
   .text-3xl {
-    font-size: 4.5rem; /* 56px */
+    font-size: 5.5rem; /* 56px */
   }
 }
