@@ -6,15 +6,14 @@ const colores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'];
 const vocales = ['a', 'e', 'i', 'o', 'u'];
 
 const combinacionesDosLetras = {
-vc: [
+  vc: [
     'al', 'an', 'ar', 'as',
     'el', 'em', 'en', 'er', 'es',
-    'id','im', 'in', 'ir', 'is',
+    'id', 'im', 'in', 'ir', 'is',
     'ob', 'ol', 'om', 'on', 'or', 'os',
     'ul', 'un', 'ur'
   ],
-  cv: 
-    [
+  cv: [
     'ba', 'be', 'bi', 'bo', 'bu',
     'ca', 'ce', 'ci', 'co', 'cu',
     'da', 'de', 'di', 'do', 'du',
@@ -31,49 +30,36 @@ vc: [
     'sa', 'se', 'si', 'so', 'su',
     'ta', 'te', 'ti', 'to', 'tu',
     'va', 've', 'vi', 'vo', 'vu',
-    'wa', 'we', 'wi', 'wo', 'wu',
     'xa', 'xe', 'xi', 'xo', 'xu',
     'ya', 'ye', 'yi', 'yo', 'yu',
     'za', 'ce', 'ci', 'zo', 'zu'
   ],
-  
   vv: [
     'ai', 'au', 'ei', 'eu', 'ia', 'ie', 'io', 'iu', 'oi', 'ou', 'ua', 'ue', 'ui', 'uo'
   ],
-  
 };
 
 const combinacionesTresLetras = {
-  // Consonante + Vocal + Consonante (CVC)
   cvc: [
-    'pan', 'sol', 'luz', 'mar', 'dos', 'fin', 'ves', 'dar', 'mes', 'sal',
-    'bol', 'pez', 'red', 'sed', 'sur', 'paz', 'voz', 'fes', 'cal', 'pis',
-    'casa', 'pata', 'sapo', 'lomo', 'luna', 'mesa', 'rama', 'taza', 'bola', 'duda'
-  ],
-  // Consonante + Diptongo (CD)
-  cd: [
-    'pie', 'fue', 'dio', 'vio', 'tia', 'mio', 'rie', 'soy', 'hoy', 'muy',
-    'rey', 'ley', 'buey', 'guay', 'cien', 'bien', 'sien', 'fiel', 'miel', 'piau'
-  ],
-  // Grupo Consonántico + Vocal (GCV)
-  gcv: [
-    'pla', 'pre', 'tri', 'clo', 'gru', 'bra', 'fle', 'dri', 'glo', 'cru',
-    'tra', 'ble', 'pli', 'fro', 'gra', 'cre', 'pri', 'tro', 'bru', 'fla'
-  ],
-  // Vocal + Consonante + Vocal (VCV)
-  vcv: [
-    'ala', 'ele', 'ilo', 'oto', 'unu', 'ara', 'ere', 'iri', 'oro', 'uru',
-    'alo', 'eli', 'ilo', 'olo', 'ulu', 'amo', 'emo', 'imo', 'umo', 'emo'
-  ],
-  // Consonante + Vocal + Vocal (CVV)
-  cvv: [
-    'cao', 'lie', 'mio', 'rue', 'bue', 'pio', 'que', 'cio', 'dio', 'tue',
-    'fie', 'lio', 'sio', 'cue', 'nie', 'mio', 'lie', 'tio', 'vie', 'lua'
+    'sol', 'mar', 'pan', 'sal', 'luz', 'fin', 'rey', 'voz', 'pie', 'paz', 
+    'té', 'rey', 'cal', 'del', 'hay', 'mis', 'ver', 'oro', 'sur', 'zar', 
+    'son', 'uno', 'dos', 'tres', 'muy', 'sin', 'las', 'por', 'más', 'ser',
+    'con', 'bra', 'bre', 'bri', 'bro', 'bru',
+    'cla', 'cle', 'cli', 'clo', 'clu',
+    'cra', 'cre', 'cri', 'cro', 'cru',
+    'dra', 'dre', 'dri', 'dro', 'dru',
+    'fra', 'fre', 'fri', 'fro', 'fru',
+    'gra', 'gre', 'gri', 'gro', 'gru',
+    'pla', 'ple', 'pli', 'plo', 'plu',
+    'pra', 'pre', 'pri', 'pro', 'pru',
+    'tra', 'tre', 'tri', 'tro', 'tru',
+    'bla', 'ble', 'bli', 'blo', 'blu',
+    'cha', 'che', 'chi', 'cho', 'chu'
   ]
 };
 
 const generarSilabaSimple = () => {
-  const tipos = ['vc', 'cv'];
+  const tipos = ['vc', 'cv', 'vv'];
   const tipoAleatorio = tipos[Math.floor(Math.random() * tipos.length)];
   const combinacionAleatoria = combinacionesDosLetras[tipoAleatorio][Math.floor(Math.random() * combinacionesDosLetras[tipoAleatorio].length)];
 
@@ -102,7 +88,7 @@ const MetodoLectura = () => {
   const generarContenido = () => {
     let siguiente;
     try {
-      switch(nivel) {
+      switch (nivel) {
         case 1:
           siguiente = generarSilabaSimple();
           break;
@@ -144,8 +130,9 @@ const MetodoLectura = () => {
           fontSize: nivel === 4 ? '2.5rem' : '6rem',
           display: 'inline-block',
           fontWeight: 'bold',
-          textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
-          marginRight: isLastInWord && nivel === 4 ? '0.2rem' : '0'
+          marginRight: isLastInWord && nivel === 4 ? '0.5rem' : '0',
+          fontFamily: 'Andika Basic',
+          textShadow: 'none' // Eliminar sombra
         }}
       >
         {letra}
@@ -159,13 +146,13 @@ const MetodoLectura = () => {
           flexWrap: 'wrap',
           justifyContent: 'center',
           alignItems: 'center',
-          gap: '0.2rem',
+          gap: '0.5rem', // Aumentar el espacio entre palabras
           maxWidth: '100%',
           overflowWrap: 'break-word',
           minHeight: '12rem'
         }}>
           {contenido.frase.split(' ').map((palabra, idx) => (
-            <div key={idx} style={{ display: 'flex', marginRight: '0.2rem' }}>
+            <div key={idx} style={{ display: 'flex', marginRight: '0.5rem' }}>
               {palabra.split('').map((letra, letraIdx, arr) =>
                 renderLetra(letra, `${idx}-${letraIdx}`, letraIdx === arr.length - 1)
               )}
