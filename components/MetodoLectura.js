@@ -54,25 +54,28 @@ const combinacionesTresLetras = {
     'pra', 'pre', 'pri', 'pro', 'pru',
     'tra', 'tre', 'tri', 'tro', 'tru',
     'bla', 'ble', 'bli', 'blo', 'blu',
-    'cha', 'che', 'chi', 'cho', 'chu'
-  ]
+    'cha', 'che', 'chi', 'cho', 'chu',
+  ],
 };
 
 const generarSilabaSimple = () => {
   const tipos = ['vc', 'cv', 'vv'];
   const tipoAleatorio = tipos[Math.floor(Math.random() * tipos.length)];
-  const combinacionAleatoria = combinacionesDosLetras[tipoAleatorio][Math.floor(Math.random() * combinacionesDosLetras[tipoAleatorio].length)];
+  const combinacionAleatoria = combinacionesDosLetras[tipoAleatorio].shift();
+  combinacionesDosLetras[tipoAleatorio].push(combinacionAleatoria);
 
-  return {
-    consonante: tipoAleatorio === 'vc' ? combinacionAleatoria[1] : combinacionAleatoria[0],
-    vocal: tipoAleatorio === 'vc' ? combinacionAleatoria[0] : combinacionAleatoria[1]
-  };
+  if (tipoAleatorio === 'vc') {
+    return { consonante: combinacionAleatoria[1], vocal: combinacionAleatoria[0] };
+  } else if (tipoAleatorio === 'cv') {
+    return { consonante: combinacionAleatoria[0], vocal: combinacionAleatoria[1] };
+  } else {
+    return { consonante: combinacionAleatoria[0], vocal: combinacionAleatoria[1] }; // Para vv, no hay consonante
+  }
 };
 
 const generarContenidoNivel2 = () => {
-  const categorias = Object.keys(combinacionesTresLetras);
-  const categoriaAleatoria = categorias[Math.floor(Math.random() * categorias.length)];
-  const combinacionAleatoria = combinacionesTresLetras[categoriaAleatoria][Math.floor(Math.random() * combinacionesTresLetras[categoriaAleatoria].length)];
+  const combinacionAleatoria = combinacionesTresLetras.cvc.shift();
+  combinacionesTresLetras.cvc.push(combinacionAleatoria);
 
   return {
     consonante: combinacionAleatoria.slice(0, -1),
