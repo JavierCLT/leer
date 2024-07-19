@@ -42,6 +42,10 @@ h1 {
   font-size: 6rem; /* Increased size */
 }
 
+.text-4xl {
+    font-size: 5rem; /* Adjusted for medium screens */
+  }
+
 @media (max-width: 768px) {
   .text-xl {
     font-size: 5rem; /* Adjusted for medium screens */
@@ -53,6 +57,10 @@ h1 {
 
   .text-3xl {
     font-size: 5rem; /* Adjusted for medium screens */
+  }
+  
+   .text-4xl {
+    font-size: 4rem; /* Adjusted for medium screens */
   }
 }
 
@@ -67,6 +75,9 @@ h1 {
 
   .text-3xl {
     font-size: 5rem; /* Adjusted for small screens */
+  }
+  .text-4xl {
+    font-size: 4rem; /* Adjusted for medium screens */
   }
 }
 
@@ -93,6 +104,4 @@ h1 {
   margin-bottom: 20px; /* Add some margin at the bottom */
 }
 
-.button-container {
-  margin-top: 20px; /* Push buttons to the bottom */
-}
+
