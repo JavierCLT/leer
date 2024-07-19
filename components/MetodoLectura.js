@@ -11,7 +11,7 @@ const combinacionesDosLetras = {
     'el', 'em', 'en', 'er', 'es',
     'id', 'im', 'in', 'ir', 'is',
     'ob', 'ol', 'om', 'on', 'or', 'os',
-    'ul', 'un', 'ur'
+    'ul', 'un'
   ],
   cv: [
     'ba', 'be', 'bi', 'bo', 'bu',
