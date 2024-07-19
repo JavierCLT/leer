@@ -175,25 +175,25 @@ const MetodoLectura = () => {
   return (
     <div className="container">
       <h1>Leyendo en Español</h1>
-      <div className="text-center mb-8 min-h-[12rem] flex items-center justify-center">
-        {renderContenido()}
-      </div>
-      <button
-        onClick={generarContenido}
-        className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg mb-6 transition duration-300"
-      >
-        Siguiente
-      </button>
-      <div className="grid grid-cols-4 gap-2">
-        {[1, 2, 3, 4].map((n) => (
-          <button
-            key={n}
-            onClick={() => setNivel(n)}
-            className={`py-2 px-3 rounded-lg font-semibold transition duration-300 ${nivel === n ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
-          >
-            Nivel {n}
-          </button>
-        ))}
+      {renderContenido()}
+      <div className="button-container">
+        <button
+          onClick={generarContenido}
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg mb-6 transition duration-300"
+        >
+          Siguiente
+        </button>
+        <div className="grid grid-cols-4 gap-2">
+          {[1, 2, 3, 4].map((n) => (
+            <button
+              key={n}
+              onClick={() => setNivel(n)}
+              className={`py-2 px-3 rounded-lg font-semibold transition duration-300 ${nivel === n ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
+            >
+              Nivel {n}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
