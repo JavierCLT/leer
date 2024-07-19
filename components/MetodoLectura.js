@@ -125,22 +125,22 @@ const MetodoLectura = () => {
       return <span className="text-3xl">Error</span>;
     }
 
-    const renderLetra = (letra, index, isLastInWord = false) => (
-      <span
-        key={index}
-        className={nivel === 4 ? "text-2xl" : "text-3xl"}
-        style={{
-          color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante,
-          display: 'inline-block',
-          fontWeight: 'bold',
-          marginRight: isLastInWord && nivel === 4 ? '0.5rem' : '0',
-          fontFamily: 'Andika Basic',
-          textShadow: 'none' // Eliminar sombra
-        }}
-      >
-        {letra}
-      </span>
-    );
+const renderLetra = (letra, index, isLastInWord = false) => (
+  <span
+    key={index}
+    className={nivel === 4 ? "text-2xl" : "text-3xl"}
+    style={{
+      color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante,
+      display: 'inline-block',
+      fontWeight: 'bold',
+      marginRight: isLastInWord && nivel === 4 ? '0.5rem' : '0',
+      fontFamily: 'Andika Basic',
+      textShadow: 'none' // Eliminar sombra
+    }}
+  >
+    {letra}
+  </span>
+);
 
     if ('frase' in contenido) {
       return (
