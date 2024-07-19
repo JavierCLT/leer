@@ -3,7 +3,7 @@ import { palabrasNivel3 } from './palabras';
 import { frasesNivel4 } from './frases';
 
 const colores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'];
-const vocales = ['a', 'e', 'i', 'o', 'u'];
+const vocales = ['a', 'e', 'i', 'o', 'u','á','é' ,'í' ,'ó' , 'ú'];
 
 const combinacionesDosLetras = {
   vc: [
