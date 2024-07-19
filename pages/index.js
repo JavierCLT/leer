@@ -1,10 +1,13 @@
-import MetodoLectura from '../components/MetodoLectura'
-
-export default function Home() {
-  return (
-    <div className="container mx-auto px-4">
-      <h1 className="text-3xl font-bold text-center my-8">Leyendo en español</h1>
-      <MetodoLectura />
-    </div>
-  )
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leer en Español</title>
+  <link href="https://fonts.googleapis.com/css2?family=Andika+Basic:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="root"></div>
+  <script src="main.js"></script>
+</body>
+</html>
