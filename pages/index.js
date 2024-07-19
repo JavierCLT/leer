@@ -4,7 +4,7 @@ import MetodoLectura from '../components/MetodoLectura';
 const Home = () => {
   return (
     <div>
-      <h1>Leer en Español</h1>
+      <h1>Leyendo en Español</h1>
       <MetodoLectura />
     </div>
   );
