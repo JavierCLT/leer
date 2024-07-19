@@ -35,11 +35,11 @@ h1 {
 }
 
 .text-2xl {
-  font-size: 5rem; /* Increased size */
+  font-size: 6rem; /* Increased size */
 }
 
 .text-3xl {
-  font-size: 4rem; /* Increased size */
+  font-size: 6rem; /* Increased size */
 }
 
 @media (max-width: 768px) {
@@ -48,25 +48,25 @@ h1 {
   }
 
   .text-2xl {
-    font-size: 4rem; /* Adjusted for medium screens */
+    font-size: 5rem; /* Adjusted for medium screens */
   }
 
   .text-3xl {
-    font-size: 3rem; /* Adjusted for medium screens */
+    font-size: 5rem; /* Adjusted for medium screens */
   }
 }
 
 @media (max-width: 480px) {
   .text-xl {
-    font-size: 4rem; /* Adjusted for small screens */
+    font-size: 5rem; /* Adjusted for small screens */
   }
 
   .text-2xl {
-    font-size: 3.5rem; /* Adjusted for small screens */
+    font-size: 5.5rem; /* Adjusted for small screens */
   }
 
   .text-3xl {
-    font-size: 3rem; /* Adjusted for small screens */
+    font-size: 5rem; /* Adjusted for small screens */
   }
 }
 
@@ -94,5 +94,5 @@ h1 {
 }
 
 .button-container {
-  margin-top: auto; /* Push buttons to the bottom */
+  margin-top: 20px; /* Push buttons to the bottom */
 }
