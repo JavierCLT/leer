@@ -7,20 +7,40 @@ const vocales = ['a', 'e', 'i', 'o', 'u'];
 
 const combinacionesDosLetras = {
   "vc": [
-    "al", "as", "an", "ar", "el", "am", "en", "es", "et", "il", "in", "is", "it", "ol", "on", "or", "os", "ot", "ul", "un", "ur"
+    "ab", "ad", "ag", "al", "am", "an", "ar", "as",
+    "eb", "ed", "el", "em", "en", "er", "es",
+    "ib", "id", "il", "im", "in", "ir", "is",
+    "ob", "od", "ol", "om", "on", "or", "os",
+    "ub", "ud", "ul", "um", "un", "ur", "us"
+  ]
+  "cv": 
+    [
+    "ba", "be", "bi", "bo", "bu",
+    "ca", "ce", "ci", "co", "cu",
+    "da", "de", "di", "do", "du",
+    "fa", "fe", "fi", "fo", "fu",
+    "ga", "ge", "gi", "go", "gu",
+    "ja", "je", "ji", "jo", "ju",
+    "ka", "ke", "ki", "ko", "ku",
+    "la", "le", "li", "lo", "lu",
+    "ma", "me", "mi", "mo", "mu",
+    "na", "ne", "ni", "no", "nu",
+    "pa", "pe", "pi", "po", "pu",
+    "que", "qui",
+    "ra", "re", "ri", "ro", "ru",
+    "sa", "se", "si", "so", "su",
+    "ta", "te", "ti", "to", "tu",
+    "va", "ve", "vi", "vo", "vu",
+    "wa", "we", "wi", "wo", "wu",
+    "xa", "xe", "xi", "xo", "xu",
+    "ya", "ye", "yi", "yo", "yu",
+    "za", "ce", "ci", "zo", "zu"
   ],
-  "cv": [
-    "ba", "be", "bi", "bo", "bu", "ca", "ce", "ci", "co", "cu", "da", "de", "di", "do", "du", "fa", "fe", "fi", "fo", "fu",
-    "ga", "ge", "gi", "go", "gu", "ja", "je", "ji", "jo", "ju", "la", "le", "li", "lo", "lu", "ma", "me", "mi", "mo", "mu",
-    "na", "ne", "ni", "no", "nu", "pa", "pe", "pi", "po", "pu", "ra", "re", "ri", "ro", "ru", "sa", "se", "si", "so", "su",
-    "ta", "te", "ti", "to", "tu", "va", "ve", "vi", "vo", "vu", "ya", "ye", "yi", "yo", "yu", "za", "ze", "zi", "zo", "zu"
-  ],
+  
   "vv": [
     "ai", "au", "ei", "eu", "ia", "ie", "io", "iu", "oi", "ou", "ua", "ue", "ui", "uo"
   ],
-  "cc": [
-    "br", "bl", "cr", "cl", "dr", "fr", "fl", "gr", "gl", "pr", "pl", "tr", "tl"
-  ]
+  
 };
 
 const combinacionesTresLetras = {
