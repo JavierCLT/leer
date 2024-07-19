@@ -133,7 +133,7 @@ const MetodoLectura = () => {
           color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante,
           display: 'inline-block',
           fontWeight: 'bold',
-          marginRight: isLastInWord && nivel === 4 ? '0.5rem' : '0',
+          marginRight: isLastInWord && nivel === 4 ? '1rem' : '0',
           fontFamily: 'Andika Basic',
           textShadow: 'none', // Eliminar sombra
         }}
@@ -146,7 +146,7 @@ const MetodoLectura = () => {
       return (
         <div className="text-container">
           {contenido.frase.split(' ').map((palabra, idx) => (
-            <div key={idx} style={{ display: 'flex', marginRight: '0.5rem' }}>
+            <div key={idx} style={{ display: 'flex', marginRight: '1rem' }}>
               {palabra.split('').map((letra, letraIdx, arr) =>
                 renderLetra(letra, `${idx}-${letraIdx}`, letraIdx === arr.length - 1)
               )}
