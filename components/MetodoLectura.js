@@ -11,7 +11,7 @@ const combinacionesDosLetras = {
     'el', 'em', 'en', 'er', 'es',
     'id', 'im', 'in', 'ir', 'is',
     'ob', 'ol', 'om', 'on', 'or', 'os',
-    'ul', 'un'
+    'ul', 'un', 'ur'
   ],
   cv: [
     'ba', 'be', 'bi', 'bo', 'bu',
@@ -134,7 +134,7 @@ const MetodoLectura = () => {
           display: 'inline-block',
           fontWeight: 'bold',
           marginRight: isLastInWord && nivel === 4 ? '0.5rem' : '0',
-          fontFamily: 'Andika Basic',
+          fontFamily: 'Andika',
           textShadow: 'none' // Eliminar sombra
         }}
       >
