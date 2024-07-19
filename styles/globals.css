@@ -116,3 +116,7 @@ h1 {
   min-height: 20rem; /* Adjusted height */
   margin-bottom: 20px; /* Add some margin at the bottom */
 }
+
+.button-container{
+margin-bottom: 10em;
+}
