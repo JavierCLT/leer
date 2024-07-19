@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Andika+Basic:wght@400;700&display=swap');
 
 body {
@@ -10,4 +14,6 @@ body {
 h1 {
   text-align: center;
   margin: 20px 0;
+  font-family: 'Andika Basic', sans-serif;
+  color: #333;
 }
