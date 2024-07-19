@@ -128,14 +128,14 @@ const MetodoLectura = () => {
     const renderLetra = (letra, index, isLastInWord = false) => (
       <span
         key={index}
-        className={nivel === 1 ? 'text-3xl' : nivel === 2 ? 'text-2xl' : nivel === 3 ? 'text-xl' : 'text-lg'}
-        style={{
-          color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante,
-          display: 'inline-block',
-          fontWeight: 'bold',
-          marginRight: isLastInWord && nivel === 4 ? '0.5rem' : '0',
-          fontFamily: 'Andika Basic',
-          textShadow: 'none' // Eliminar sombra
+        className={nivel === 1 ? 'text-3xl' : nivel === 2 ? 'text-2xl' : nivel === 3 ? 'text-xl' : 'text-4xl'}
+    style={{
+      color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante,
+      display: 'inline-block',
+      fontWeight: 'bold',
+      marginRight: isLastInWord && nivel === 4 ? '0.5rem' : '0',
+      fontFamily: 'Andika Basic',
+      textShadow: 'none' // Eliminar sombra
         }}
       >
         {letra}
