@@ -144,16 +144,7 @@ const MetodoLectura = () => {
 
     if ('frase' in contenido) {
       return (
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '0.5rem', // Aumentar el espacio entre palabras
-          maxWidth: '100%',
-          overflowWrap: 'break-word',
-          minHeight: '12rem'
-        }}>
+        <div className="text-container">
           {contenido.frase.split(' ').map((palabra, idx) => (
             <div key={idx} style={{ display: 'flex', marginRight: '0.5rem' }}>
               {palabra.split('').map((letra, letraIdx, arr) =>
@@ -165,22 +156,16 @@ const MetodoLectura = () => {
       );
     } else if ('palabra' in contenido) {
       return (
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          maxWidth: '100%',
-          overflowWrap: 'break-word'
-        }}>
+        <div className="text-container">
           {contenido.palabra.split('').map(renderLetra)}
         </div>
       );
     } else if ('consonante' in contenido && 'vocal' in contenido) {
       return (
-        <>
+        <div className="text-container">
           {contenido.consonante.split('').map((letra, index) => renderLetra(letra, 'c' + index))}
           {contenido.vocal.split('').map((letra, index) => renderLetra(letra, 'v' + index))}
-        </>
+        </div>
       );
     } else {
       return <span className="text-3xl">Error</span>;
@@ -188,28 +173,27 @@ const MetodoLectura = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden h-full">
-      <div className="px-8 py-10 flex flex-col justify-center h-full">
-        <div className="text-center mb-8 min-h-[12rem] flex items-center justify-center">
-          {renderContenido()}
-        </div>
-        <button
-          onClick={generarContenido}
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg mb-6 transition duration-300"
-        >
-          Siguiente
-        </button>
-        <div className="grid grid-cols-4 gap-2">
-          {[1, 2, 3, 4].map((n) => (
-            <button
-              key={n}
-              onClick={() => setNivel(n)}
-              className={`py-2 px-3 rounded-lg font-semibold transition duration-300 ${nivel === n ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
-            >
-              Nivel {n}
-            </button>
-          ))}
-        </div>
+    <div className="container">
+      <h1>Leyendo en Español</h1>
+      <div className="text-center mb-8 min-h-[12rem] flex items-center justify-center">
+        {renderContenido()}
+      </div>
+      <button
+        onClick={generarContenido}
+        className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg mb-6 transition duration-300"
+      >
+        Siguiente
+      </button>
+      <div className="grid grid-cols-4 gap-2">
+        {[1, 2, 3, 4].map((n) => (
+          <button
+            key={n}
+            onClick={() => setNivel(n)}
+            className={`py-2 px-3 rounded-lg font-semibold transition duration-300 ${nivel === n ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
+          >
+            Nivel {n}
+          </button>
+        ))}
       </div>
     </div>
   );
