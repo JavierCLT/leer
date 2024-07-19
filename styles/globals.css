@@ -33,25 +33,25 @@ h1 {
 .text-xl {
   font-size: 6rem; /* Increased size */
   line-height: 1.2; /* Adjust line height */
-  word-spacing: 1.5rem; /* Adjust word spacing */
+  word-spacing: 2.5rem; /* Adjust word spacing */
 }
 
 .text-2xl {
   font-size: 6rem; /* Increased size */
   line-height: 1.2; /* Adjust line height */
-  word-spacing: 1.5rem; /* Adjust word spacing */
+  word-spacing: 2.5rem; /* Adjust word spacing */
 }
 
 .text-3xl {
   font-size: 6rem; /* Increased size */
   line-height: 1.2; /* Adjust line height */
-  word-spacing: 1.5rem; /* Adjust word spacing */
+  word-spacing: 2.5rem; /* Adjust word spacing */
 }
 
 .text-4xl {
   font-size: 5rem; /* Adjusted for medium screens */
   line-height: 1.2; /* Adjust line height */
-  word-spacing: 1.5rem; /* Adjust word spacing */
+  word-spacing: 2.5rem; /* Adjust word spacing */
 }
 
 @media (max-width: 768px) {
