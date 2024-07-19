@@ -3,7 +3,7 @@ import { palabrasNivel3 } from './palabras';
 import { frasesNivel4 } from './frases';
 
 const colores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'];
-const vocales = ['a', 'e', 'i', 'o', 'u','á','é' ,'í' ,'ó' , 'ú'];
+const vocales = ['a', 'e', 'i', 'o', 'u', 'á', 'é', 'í', 'ó', 'ú'];
 
 const combinacionesDosLetras = {
   vc: [
@@ -129,13 +129,13 @@ const MetodoLectura = () => {
       <span
         key={index}
         className={nivel === 1 ? 'text-3xl' : nivel === 2 ? 'text-2xl' : nivel === 3 ? 'text-xl' : 'text-4xl'}
-    style={{
-      color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante,
-      display: 'inline-block',
-      fontWeight: 'bold',
-      marginRight: isLastInWord && nivel === 4 ? '0.5rem' : '0',
-      fontFamily: 'Andika Basic',
-      textShadow: 'none' // Eliminar sombra
+        style={{
+          color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante,
+          display: 'inline-block',
+          fontWeight: 'bold',
+          marginRight: isLastInWord && nivel === 4 ? '0.5rem' : '0',
+          fontFamily: 'Andika Basic',
+          textShadow: 'none', // Eliminar sombra
         }}
       >
         {letra}
