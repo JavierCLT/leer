@@ -124,3 +124,7 @@ h1 {
 .button-container{
 margin-bottom: 10em;
 }
+
+.margin-left {
+  margin-left: 1rem;
+}
