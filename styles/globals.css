@@ -18,78 +18,91 @@ body {
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Align items to the top */
+  align-items: flex-start;
 }
 
 h1 {
   text-align: center;
-  margin: 10px 0 20px 0; /* Adjust margin */
+  margin: 10px 0 20px 0;
   font-family: 'Andika Basic', sans-serif;
   color: #333;
   font-size: 2rem;
 }
 
-/* Larger font sizes */
+/* Font sizes */
 .text-xl {
-  font-size: 6rem; /* Increased size */
+  font-size: 6rem;
+  line-height: 1.2;
 }
 
 .text-2xl {
-  font-size: 6rem; /* Increased size */
+  font-size: 6rem;
+  line-height: 1.2;
 }
 
 .text-3xl {
-  font-size: 6rem; /* Increased size */
+  font-size: 6rem;
+  line-height: 1.2;
 }
 
 .text-4xl {
-    font-size: 5rem; /* Adjusted for medium screens */
-  }
+  font-size: 5rem;
+  line-height: 1.2;
+}
 
 @media (max-width: 768px) {
   .text-xl {
-    font-size: 5rem; /* Adjusted for medium screens */
+    font-size: 5rem;
+    line-height: 1.2;
   }
 
   .text-2xl {
-    font-size: 5rem; /* Adjusted for medium screens */
+    font-size: 5rem;
+    line-height: 1.2;
   }
 
   .text-3xl {
-    font-size: 5rem; /* Adjusted for medium screens */
+    font-size: 5rem;
+    line-height: 1.2;
   }
-  
-   .text-4xl {
-    font-size: 4rem; /* Adjusted for medium screens */
+
+  .text-4xl {
+    font-size: 4rem;
+    line-height: 1.2;
   }
 }
 
 @media (max-width: 480px) {
   .text-xl {
-    font-size: 5rem; /* Adjusted for small screens */
+    font-size: 4rem;
+    line-height: 1.2;
   }
 
   .text-2xl {
-    font-size: 5.5rem; /* Adjusted for small screens */
+    font-size: 4rem;
+    line-height: 1.2;
   }
 
   .text-3xl {
-    font-size: 5rem; /* Adjusted for small screens */
+    font-size: 4rem;
+    line-height: 1.2;
   }
+
   .text-4xl {
-    font-size: 4rem; /* Adjusted for medium screens */
+    font-size: 3.5rem;
+    line-height: 1.2;
   }
 }
 
-/* Add this new class for the container */
+/* Container class */
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: calc(100vh - 50px); /* Adjust height to fit screen better */
-  padding: 20px 20px; /* Add padding */
+  height: 100vh;
+  padding: 20px;
   box-sizing: border-box;
 }
 
@@ -98,10 +111,16 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  width: 100%;
   max-width: 100%;
   overflow-wrap: break-word;
-  min-height: 25rem; /* Adjusted height */
-  margin-bottom: 20px; /* Add some margin at the bottom */
+  margin-bottom: 20px;
+  flex: 1; /* Allow the text container to grow and fill available space */
 }
 
-
+.button-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
