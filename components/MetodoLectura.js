@@ -113,14 +113,14 @@ const MetodoLectura = () => {
     }
 
     setContenido(siguiente);
-    setColorConsonante(colores[Math.floor(Math.random() * colores.length)]);
+    setColorConsonante(colones[Math.floor(Math.random() * colones.length)]);
   };
 
   useEffect(() => {
     generarContenido();
   }, [nivel]);
 
-    const renderContenido = () => {
+  const renderContenido = () => {
     if (!contenido) {
       return <span className="text-3xl">Error</span>;
     }
@@ -128,7 +128,7 @@ const MetodoLectura = () => {
     const renderLetra = (letra, index, isLastInWord = false) => (
       <span
         key={index}
-        className={nivel === 4 ? 'text-3xl' : 'text-xl'}
+        className={nivel === 1 ? 'text-3xl' : nivel === 2 ? 'text-2xl' : nivel === 3 ? 'text-xl' : 'text-lg'}
         style={{
           color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante,
           display: 'inline-block',
