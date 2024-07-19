@@ -17,13 +17,14 @@ body {
   box-sizing: border-box;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
 }
 
 h1 {
   text-align: center;
-  margin: 20px 0;
+  margin: 10px 0;
   font-family: 'Andika Basic', sans-serif;
   color: #333;
   font-size: 2rem;
@@ -31,41 +32,63 @@ h1 {
 
 /* Larger font sizes */
 .text-xl {
-  font-size: 7rem; /* 64px */
+  font-size: 5rem; /* Reduced size */
 }
 
 .text-2xl {
-  font-size: 7.5rem; /* 72px */
+  font-size: 4rem; /* Reduced size */
 }
 
 .text-3xl {
-  font-size: 7rem; /* 80px */
+  font-size: 3rem; /* Reduced size */
 }
 
 @media (max-width: 768px) {
   .text-xl {
-    font-size: 6rem; /* 48px */
+    font-size: 4rem; /* Adjusted for medium screens */
   }
 
   .text-2xl {
-    font-size: 6.5rem; /* 56px */
+    font-size: 3.5rem; /* Adjusted for medium screens */
   }
 
   .text-3xl {
-    font-size: 6rem; /* 64px */
+    font-size: 3rem; /* Adjusted for medium screens */
   }
 }
 
 @media (max-width: 480px) {
   .text-xl {
-    font-size: 7.5rem; /* 40px */
+    font-size: 3.5rem; /* Adjusted for small screens */
   }
 
   .text-2xl {
-    font-size: 6rem; /* 48px */
+    font-size: 3rem; /* Adjusted for small screens */
   }
 
   .text-3xl {
-    font-size: 5.5rem; /* 56px */
+    font-size: 2.5rem; /* Adjusted for small screens */
   }
+}
+
+/* Add this new class for the container */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 40px); /* Adjust height to fit screen better */
+  padding: 0 20px;
+}
+
+.text-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  min-height: 30rem; /* Increased height */
+  margin-bottom: 20px; /* Add some margin at the bottom */
 }
