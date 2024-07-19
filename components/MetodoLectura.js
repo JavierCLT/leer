@@ -122,19 +122,19 @@ const MetodoLectura = () => {
 
   const renderContenido = () => {
     if (!contenido) {
-      return <span style={{ fontSize: '6rem' }}>Error</span>;
+      return <span className="text-3xl">Error</span>;
     }
 
     const renderLetra = (letra, index, isLastInWord = false) => (
       <span
         key={index}
+        className={nivel === 4 ? "text-2xl" : "text-3xl"}
         style={{
           color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante,
-          fontSize: nivel === 4 ? '2.5rem' : '6rem',
           display: 'inline-block',
           fontWeight: 'bold',
           marginRight: isLastInWord && nivel === 4 ? '0.5rem' : '0',
-          fontFamily: 'Andika',
+          fontFamily: 'Andika Basic',
           textShadow: 'none' // Eliminar sombra
         }}
       >
@@ -183,7 +183,7 @@ const MetodoLectura = () => {
         </>
       );
     } else {
-      return <span style={{ fontSize: '6rem' }}>Error</span>;
+      return <span className="text-3xl">Error</span>;
     }
   };
 
