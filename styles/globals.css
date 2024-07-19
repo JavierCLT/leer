@@ -24,43 +24,43 @@ h1 {
   color: #333;
 }
 
-/* Responsive font sizes */
+/* Larger font sizes */
 .text-xl {
-  font-size: 2rem; /* 32px */
+  font-size: 3rem; /* 48px */
 }
 
 .text-2xl {
-  font-size: 2.5rem; /* 40px */
+  font-size: 3.5rem; /* 56px */
 }
 
 .text-3xl {
-  font-size: 3rem; /* 48px */
+  font-size: 4rem; /* 64px */
 }
 
 @media (max-width: 768px) {
   .text-xl {
-    font-size: 1.5rem; /* 24px */
+    font-size: 2.5rem; /* 40px */
   }
 
   .text-2xl {
-    font-size: 2rem; /* 32px */
+    font-size: 3rem; /* 48px */
   }
 
   .text-3xl {
-    font-size: 2.5rem; /* 40px */
+    font-size: 3.5rem; /* 56px */
   }
 }
 
 @media (max-width: 480px) {
   .text-xl {
-    font-size: 1.25rem; /* 20px */
+    font-size: 2rem; /* 32px */
   }
 
   .text-2xl {
-    font-size: 1.75rem; /* 28px */
+    font-size: 2.5rem; /* 40px */
   }
 
   .text-3xl {
-    font-size: 2rem; /* 32px */
+    font-size: 3rem; /* 48px */
   }
 }
