@@ -113,7 +113,7 @@ const MetodoLectura = () => {
     }
 
     setContenido(siguiente);
-    setColorConsonante(colones[Math.floor(Math.random() * colones.length)]);
+    setColorConsonante(colores[Math.floor(Math.random() * colores.length)]);
   };
 
   useEffect(() => {
