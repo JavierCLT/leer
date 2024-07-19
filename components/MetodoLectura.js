@@ -144,7 +144,7 @@ const MetodoLectura = () => {
 
     if ('frase' in contenido) {
       return (
-        <div className="text-container">
+        <div className={`text-container ${nivel === 4 ? 'margin-left' : ''}`}>
           {contenido.frase.split(' ').map((palabra, idx) => (
             <div key={idx} style={{ display: 'flex', marginRight: '1rem' }}>
               {palabra.split('').map((letra, letraIdx, arr) =>
@@ -156,13 +156,13 @@ const MetodoLectura = () => {
       );
     } else if ('palabra' in contenido) {
       return (
-        <div className="text-container">
+        <div className={`text-container ${nivel === 4 ? 'margin-left' : ''}`}>
           {contenido.palabra.split('').map(renderLetra)}
         </div>
       );
     } else if ('consonante' in contenido && 'vocal' in contenido) {
       return (
-        <div className="text-container">
+        <div className={`text-container ${nivel === 4 ? 'margin-left' : ''}`}>
           {contenido.consonante.split('').map((letra, index) => renderLetra(letra, 'c' + index))}
           {contenido.vocal.split('').map((letra, index) => renderLetra(letra, 'v' + index))}
         </div>
