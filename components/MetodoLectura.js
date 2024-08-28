@@ -19,6 +19,7 @@ const combinacionesDosLetras = {
     'da', 'de', 'di', 'do', 'du',
     'fa', 'fe', 'fi', 'fo', 'fu',
     'ga', 'ge', 'gi', 'go', 'gu',
+    'ha', 'he', 'hi', 'ho', 'hu',
     'ja', 'je', 'ji', 'jo', 'ju',
     'ka', 'ke', 'ki', 'ko', 'ku',
     'la', 'le', 'li', 'lo', 'lu',
