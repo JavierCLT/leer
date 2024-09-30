@@ -23,9 +23,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f5f5f5;
+  background-color: white; /* All background is white */
   height: 100vh; /* Full viewport height */
   margin: 0;
+  width: 100%; /* Ensure full width is used */
 }
 
 /* Container for the entire content */
@@ -34,13 +35,11 @@ body {
   flex-direction: column;
   justify-content: space-between; /* Space between content */
   align-items: center;
-  width: 95%; /* Reduced width for smaller white background */
-  height: 90vh; /* Adjusted height to ensure everything fits */
+  width: 100%; /* Full width */
+  height: 95vh; /* Adjusted height to ensure everything fits */
   max-width: 800px;
   padding: 10px;
   background-color: white;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  margin: 10px auto; /* Add margin for space below */
 }
 
 /* Title - Adjust for different screen sizes */
@@ -52,7 +51,7 @@ h1 {
   margin: 10px 0; /* Reduced margin */
 }
 
-/* Responsive font size */
+/* Responsive font size with reduced line spacing */
 #contenidoContainer {
   display: flex;
   flex-wrap: wrap;
@@ -64,7 +63,7 @@ h1 {
   margin-bottom: 10px;
   padding: 10px;
   font-size: 3em; /* Default font size for content */
-  line-height: 1.2;
+  line-height: 1; /* Reduced line height */
 }
 
 /* Responsive font size for different screen sizes */
