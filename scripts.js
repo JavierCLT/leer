@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { palabrasNivel3 } from './palabras';
-import { frasesNivel4 } from './frases';
-
+// Constants and data
 const colores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'];
 const vocales = ['a', 'e', 'i', 'o', 'u', 'á', 'é', 'í', 'ó', 'ú'];
 
@@ -59,150 +56,17 @@ const combinacionesTresLetras = {
   ],
 };
 
-const generarSilabaSimple = () => {
-  const tipos = ['vc', 'cv', 'vv'];
-  const tipoAleatorio = tipos[Math.floor(Math.random() * tipos.length)];
-  const combinacionAleatoria = combinacionesDosLetras[tipoAleatorio].shift();
-  combinacionesDosLetras[tipoAleatorio].push(combinacionAleatoria);
+const palabrasNivel3 = [
+  'casa', 'perro', 'gato', 'árbol', 'flor', 'sol', 'luna', 'estrella',
+  'agua', 'fuego', 'tierra', 'aire', 'libro', 'mesa', 'silla', 'cama',
+  'puerta', 'ventana', 'coche', 'bici', 'tren', 'avión', 'barco', 'pez',
+  'pájaro', 'mano', 'pie', 'ojo', 'nariz', 'boca', 'oreja', 'diente',
+  'pelo', 'brazo', 'pierna', 'dedo', 'uña', 'corazón', 'cerebro', 'hueso',
+  'rojo', 'azul', 'verde', 'amarillo', 'blanco', 'negro', 'rosa', 'naranja',
+  'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez'
+];
 
-  if (tipoAleatorio === 'vc') {
-    return { consonante: combinacionAleatoria[1], vocal: combinacionAleatoria[0] };
-  } else if (tipoAleatorio === 'cv') {
-    return { consonante: combinacionAleatoria[0], vocal: combinacionAleatoria[1] };
-  } else {
-    return { consonante: combinacionAleatoria[0], vocal: combinacionAleatoria[1] }; // Para vv, no hay consonante
-  }
-};
-
-const generarContenidoNivel2 = () => {
-  const combinacionAleatoria = combinacionesTresLetras.cvc.shift();
-  combinacionesTresLetras.cvc.push(combinacionAleatoria);
-
-  return {
-    consonante: combinacionAleatoria.slice(0, -1),
-    vocal: combinacionAleatoria.slice(-1)
-  };
-};
-
-const MetodoLectura = () => {
-  const [nivel, setNivel] = useState(1);
-  const [contenido, setContenido] = useState({});
-  const [colorConsonante, setColorConsonante] = useState('');
-
-  const generarContenido = () => {
-    let siguiente;
-    try {
-      switch (nivel) {
-        case 1:
-          siguiente = generarSilabaSimple();
-          break;
-        case 2:
-          siguiente = generarContenidoNivel2();
-          break;
-        case 3:
-          siguiente = { palabra: palabrasNivel3[Math.floor(Math.random() * palabrasNivel3.length)] };
-          break;
-        case 4:
-          siguiente = { frase: frasesNivel4[Math.floor(Math.random() * frasesNivel4.length)] };
-          break;
-        default:
-          siguiente = generarSilabaSimple();
-      }
-    } catch (error) {
-      console.error("Error generando contenido:", error);
-      siguiente = { consonante: 'e', vocal: 'r' }; // Valor por defecto en caso de error
-    }
-
-    setContenido(siguiente);
-    setColorConsonante(colores[Math.floor(Math.random() * colores.length)]);
-  };
-
-  useEffect(() => {
-    generarContenido();
-  }, [nivel]);
-
-  const renderContenido = () => {
-    if (!contenido) {
-      return <span className="text-3xl">Error</span>;
-    }
-
-    const renderLetra = (letra, index, isLastInWord = false) => (
-      <span
-        key={index}
-        className={nivel === 1 ? 'text-3xl' : nivel === 2 ? 'text-2xl' : nivel === 3 ? 'text-xl' : 'text-4xl'}
-        style={{
-          color: vocales.includes(letra.toLowerCase()) ? 'black' : colorConsonante,
-          display: 'inline-block',
-          fontWeight: 'bold',
-          marginRight: isLastInWord && nivel === 4 ? '1rem' : '0',
-          fontFamily: 'Andika Basic',
-          textShadow: 'none', // Eliminar sombra
-        }}
-      >
-        {letra}
-      </span>
-    );
-
-    if ('frase' in contenido) {
-      return (
-        <div className={`text-container ${nivel === 4 ? 'margin-left' : ''}`}>
-          {contenido.frase.split(' ').map((palabra, idx) => (
-            <div key={idx} style={{ display: 'flex', marginRight: '1rem' }}>
-              {palabra.split('').map((letra, letraIdx, arr) =>
-                renderLetra(letra, `${idx}-${letraIdx}`, letraIdx === arr.length - 1)
-              )}
-            </div>
-          ))}
-        </div>
-      );
-    } else if ('palabra' in contenido) {
-      return (
-        <div className={`text-container ${nivel === 4 ? 'margin-left' : ''}`}>
-          {contenido.palabra.split('').map(renderLetra)}
-        </div>
-      );
-    } else if ('consonante' in contenido && 'vocal' in contenido) {
-      return (
-        <div className={`text-container ${nivel === 4 ? 'margin-left' : ''}`}>
-          {contenido.consonante.split('').map((letra, index) => renderLetra(letra, 'c' + index))}
-          {contenido.vocal.split('').map((letra, index) => renderLetra(letra, 'v' + index))}
-        </div>
-      );
-    } else {
-      return <span className="text-3xl">Error</span>;
-    }
-  };
-
-  return (
-    <div className="container">
-      <h1>Leyendo en Español</h1>
-      {renderContenido()}
-      <div className="button-container">
-        <button
-          onClick={generarContenido}
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg mb-6 transition duration-300"
-        >
-          Siguiente
-        </button>
-        <div className="grid grid-cols-4 gap-2">
-          {[1, 2, 3, 4].map((n) => (
-            <button
-              key={n}
-              onClick={() => setNivel(n)}
-              className={`py-2 px-3 rounded-lg font-semibold transition duration-300 ${nivel === n ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
-            >
-              Nivel {n}
-            </button>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default MetodoLectura;
-
-export const frasesNivel4 = [
+const frasesNivel4 = [
   'El sol brilla',
   'La luna es blanca',
   'El perro ladra',
@@ -233,12 +97,154 @@ export const frasesNivel4 = [
   'La moto hace mucho ruido'
 ];
 
-export const palabrasNivel3 = [
-  'casa', 'perro', 'gato', 'árbol', 'flor', 'sol', 'luna', 'estrella',
-  'agua', 'fuego', 'tierra', 'aire', 'libro', 'mesa', 'silla', 'cama',
-  'puerta', 'ventana', 'coche', 'bici', 'tren', 'avión', 'barco', 'pez',
-  'pájaro', 'mano', 'pie', 'ojo', 'nariz', 'boca', 'oreja', 'diente',
-  'pelo', 'brazo', 'pierna', 'dedo', 'uña', 'corazón', 'cerebro', 'hueso',
-  'rojo', 'azul', 'verde', 'amarillo', 'blanco', 'negro', 'rosa', 'naranja',
-  'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez'
-];
+// Helper functions
+function generarSilabaSimple() {
+  const tipos = ['vc', 'cv', 'vv'];
+  const tipoAleatorio = tipos[Math.floor(Math.random() * tipos.length)];
+  const combinacionAleatoria = combinacionesDosLetras[tipoAleatorio].shift();
+  combinacionesDosLetras[tipoAleatorio].push(combinacionAleatoria);
+
+  if (tipoAleatorio === 'vc') {
+    return { consonante: combinacionAleatoria[1], vocal: combinacionAleatoria[0] };
+  } else if (tipoAleatorio === 'cv') {
+    return { consonante: combinacionAleatoria[0], vocal: combinacionAleatoria[1] };
+  } else {
+    return { consonante: combinacionAleatoria[0], vocal: combinacionAleatoria[1] };
+  }
+}
+
+function generarContenidoNivel2() {
+  const combinacionAleatoria = combinacionesTresLetras.cvc.shift();
+  combinacionesTresLetras.cvc.push(combinacionAleatoria);
+
+  return {
+    consonante: combinacionAleatoria.slice(0, -1),
+    vocal: combinacionAleatoria.slice(-1)
+  };
+}
+
+// Main class
+class MetodoLectura {
+  constructor() {
+    this.nivel = 1;
+    this.contenido = {};
+    this.colorConsonante = '';
+    this.init();
+  }
+
+  init() {
+    this.generarContenido();
+    this.setupEventListeners();
+    this.render();
+  }
+
+  setupEventListeners() {
+    document.getElementById('nextButton').addEventListener('click', () => this.generarContenido());
+    document.querySelectorAll('.level-button').forEach(button => {
+      button.addEventListener('click', (e) => this.setNivel(parseInt(e.target.dataset.level)));
+    });
+  }
+
+  generarContenido() {
+    let siguiente;
+    try {
+      switch (this.nivel) {
+        case 1:
+          siguiente = generarSilabaSimple();
+          break;
+        case 2:
+          siguiente = generarContenidoNivel2();
+          break;
+        case 3:
+          siguiente = { palabra: palabrasNivel3[Math.floor(Math.random() * palabrasNivel3.length)] };
+          break;
+        case 4:
+          siguiente = { frase: frasesNivel4[Math.floor(Math.random() * frasesNivel4.length)] };
+          break;
+        default:
+          siguiente = generarSilabaSimple();
+      }
+    } catch (error) {
+      console.error("Error generando contenido:", error);
+      siguiente = { consonante: 'e', vocal: 'r' };
+    }
+
+    this.contenido = siguiente;
+    this.colorConsonante = colores[Math.floor(Math.random() * colores.length)];
+    this.render();
+  }
+
+  setNivel(newNivel) {
+    this.nivel = newNivel;
+    this.generarContenido();
+    this.updateLevelButtons();
+  }
+
+  updateLevelButtons() {
+    document.querySelectorAll('.level-button').forEach(button => {
+      const buttonLevel = parseInt(button.dataset.level);
+      if (buttonLevel === this.nivel) {
+        button.classList.add('active-level');
+      } else {
+        button.classList.remove('active-level');
+      }
+    });
+  }
+
+  renderLetra(letra, index, isLastInWord = false) {
+    const span = document.createElement('span');
+    span.textContent = letra;
+    span.style.color = vocales.includes(letra.toLowerCase()) ? 'black' : this.colorConsonante;
+    span.style.display = 'inline-block';
+    span.style.fontWeight = 'bold';
+    span.style.marginRight = isLastInWord && this.nivel === 4 ? '1rem' : '0';
+    span.style.fontFamily = 'Andika Basic';
+    span.style.textShadow = 'none';
+    span.className = this.nivel === 1 ? 'text-3xl' : this.nivel === 2 ? 'text-2xl' : this.nivel === 3 ? 'text-xl' : 'text-4xl';
+    return span;
+  }
+
+  renderContenido() {
+    const container = document.getElementById('contenidoContainer');
+    container.innerHTML = '';
+    container.className = `text-container ${this.nivel === 4 ? 'margin-left' : ''}`;
+
+    if ('frase' in this.contenido) {
+      this.contenido.frase.split(' ').forEach((palabra, idx) => {
+        const palabraDiv = document.createElement('div');
+        palabraDiv.style.display = 'flex';
+        palabraDiv.style.marginRight = '1rem';
+        palabra.split('').forEach((letra, letraIdx, arr) => {
+          palabraDiv.appendChild(this.renderLetra(letra, `${idx}-${letraIdx}`, letraIdx === arr.length - 1));
+        });
+        container.appendChild(palabraDiv);
+      });
+    } else if ('palabra' in this.contenido) {
+      this.contenido.palabra.split('').forEach((letra, index) => {
+        container.appendChild(this.renderLetra(letra, index));
+      });
+    } else if ('consonante' in this.contenido && 'vocal' in this.contenido) {
+      this.contenido.consonante.split('').forEach((letra, index) => {
+        container.appendChild(this.renderLetra(letra, 'c' + index));
+      });
+      this.contenido.vocal.split('').forEach((letra, index) => {
+        container.appendChild(this.renderLetra(letra, 'v' + index));
+      });
+    } else {
+      const errorSpan = document.createElement('span');
+      errorSpan.textContent = 'Error';
+      errorSpan.className = 'text-3xl';
+      container.appendChild(errorSpan);
+    }
+  }
+
+  render() {
+    this.renderContenido();
+    this.updateLevelButtons();
+  }
+}
+
+// Initialize the app when the DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  new MetodoLectura();
+});
