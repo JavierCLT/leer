@@ -32,14 +32,15 @@ body {
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center vertically */
+  justify-content: space-between; /* Space between content */
   align-items: center;
-  width: 100%;
-  height: 100vh; /* Full viewport height */
+  width: 95%; /* Reduced width for smaller white background */
+  height: 90vh; /* Adjusted height to ensure everything fits */
   max-width: 800px;
-  padding: 20px;
+  padding: 10px;
   background-color: white;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin: 10px auto; /* Add margin for space below */
 }
 
 /* Title - Adjust for different screen sizes */
@@ -47,7 +48,7 @@ h1 {
   text-align: center;
   font-family: 'Andika Basic', sans-serif;
   color: #333;
-  font-size: 1.5rem; /* Reduced font size */
+  font-size: 2rem; /* Larger font size */
   margin: 10px 0; /* Reduced margin */
 }
 
@@ -57,11 +58,11 @@ h1 {
   justify-content: center;
   align-items: center;
   max-width: 100%;
-  flex-grow: 1; /* Grow with the viewport */
+  flex-grow: 1; /* Allow content to grow */
   overflow-wrap: break-word;
-  margin-bottom: 10px; /* Reduced margin */
-  padding: 20px;
-  font-size: 3.8em; /* Increased font size */
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 4.5em; /* Increased font size */
 }
 
 /* Buttons Container */
@@ -69,6 +70,7 @@ h1 {
   width: 100%;
   max-width: 400px;
   margin-top: auto;
+  margin-bottom: 10px; /* Add margin below the buttons */
 }
 
 /* Next Button */
@@ -83,7 +85,7 @@ h1 {
   margin-bottom: 1.5rem;
   transition: background-color 0.3s, transform 0.1s;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1.5rem; /* Larger font size for buttons */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -106,7 +108,7 @@ h1 {
 
 .level-button {
   flex: 1;
-  padding: 12px 15px;
+  padding: 15px 20px;
   border-radius: 8px;
   font-weight: 600;
   transition: all 0.3s;
@@ -114,7 +116,7 @@ h1 {
   color: #333;
   border: none;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.2rem; /* Larger font size for level buttons */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -134,17 +136,22 @@ h1 {
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
   h1 {
-    font-size: 1.5rem; /* Smaller title font size on smaller screens */
+    font-size: 1.8rem; /* Adjust title font size */
   }
   
   #contenidoContainer {
-    font-size: 3.5em; /* Adjust font size for mobile screens */
+    font-size: 4rem; /* Adjust content font size */
+  }
+
+  .level-button {
+    flex-basis: calc(50% - 5px); /* Make buttons fit in one row */
+    margin-bottom: 10px;
   }
 }
 
 @media (max-width: 480px) {
   .next-button, .level-button {
-    font-size: 1rem;
-    padding: 10px 15px;
+    font-size: 1.2rem; /* Adjust button font size */
+    padding: 12px 15px;
   }
 }
