@@ -55,7 +55,7 @@ h1 {
   min-height: 20rem;
   margin-bottom: 30px;
   padding: 20px;
-  font-size: 2.5rem; /* Increased font size for generated content */
+  font-size: 4rem; /* Increased font size for generated content */
 }
 
 /* Buttons Container */
@@ -132,7 +132,7 @@ h1 {
   }
   
   #contenidoContainer {
-    font-size: 2rem; /* Adjust font size for content on smaller screens */
+    font-size: 4rem; /* Adjust font size for content on smaller screens */
   }
 
    
