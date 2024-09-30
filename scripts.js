@@ -169,15 +169,24 @@ class MetodoLectura {
     });
   }
 
+  let lastConsonantColor = '';  // Track the last consonant color applied
+  
   getConsonantColor(consonant) {
-  // Treat "ch" and "ll" as single consonants
-  if (consonant.toLowerCase() === 'ch' || consonant.toLowerCase() === 'll') {
-    consonant = consonant.toLowerCase(); // Normalize to ensure consistency
+  // Handle special cases like "ch", "ll", "rr", "cc"
+  if (consonant.toLowerCase() === 'ch' || consonant.toLowerCase() === 'll' || consonant.toLowerCase() === 'rr' || consonant.toLowerCase() === 'cc') {
+    consonant = consonant.toLowerCase();
   }
 
   if (!this.consonantColors[consonant]) {
-    this.consonantColors[consonant] = colores[this.colorIndex];
-    this.colorIndex = (this.colorIndex + 1) % colores.length;
+    let newColor;
+    // Ensure new color is not the same as the last applied consonant color
+    do {
+      newColor = colores[this.colorIndex];
+      this.colorIndex = (this.colorIndex + 1) % colores.length;
+    } while (newColor === lastConsonantColor);  // Avoid assigning the same color consecutively
+    
+    this.consonantColors[consonant] = newColor;
+    lastConsonantColor = newColor;  // Set the last consonant color
   }
 
   return this.consonantColors[consonant];
