@@ -196,17 +196,23 @@ class MetodoLectura {
   renderLetra(letra, index, isLastInWord = false) {
   const span = document.createElement('span');
   
-  // Detect if "ch" or "ll" is at this position and treat them as a unit
+  // Detect if "ch", "ll", "rr", or "cc" is at this position and treat them as a unit
   const nextLetra = this.contenido.consonante && this.contenido.consonante[index + 1];
   
-  if ((letra === 'c' && nextLetra === 'h') || (letra === 'l' && nextLetra === 'l')) {
-    letra = letra + nextLetra;  // Combine "ch" or "ll" as a single unit
-    this.contenido.consonante = this.contenido.consonante.slice(0, index + 1) + this.contenido.consonante.slice(index + 2); // Skip next letter
+  // Handle special consonant combinations
+  if ((letra === 'c' && nextLetra === 'h') || 
+      (letra === 'l' && nextLetra === 'l') ||
+      (letra === 'r' && nextLetra === 'r') ||
+      (letra === 'c' && nextLetra === 'c')) {
+    letra = letra + nextLetra;  // Combine the special case into a single unit
+    this.contenido.consonante = this.contenido.consonante.slice(0, index + 1) + this.contenido.consonante.slice(index + 2); // Skip the next letter
   }
 
   span.textContent = letra;
 
+  // Check if the letter is a consonant
   const isConsonant = !vocales.includes(letra.toLowerCase());
+  
   if (isConsonant) {
     span.style.color = this.getConsonantColor(letra.toLowerCase());
   } else {
