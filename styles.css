@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Andika Basic';
+  src: url('fonts/AndikaBasic-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 * {
   box-sizing: border-box;
@@ -11,14 +18,43 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  background-color: #f5f5f5;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  height: 100vh;
+  padding: 20px;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   text-align: center;
-  margin: 10px 0 20px 0;
+  margin: 20px 0 30px 0;
   font-family: 'Andika Basic', sans-serif;
   color: #333;
-  font-size: 2rem;
+  font-size: 2.5rem;
+}
+
+.text-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  min-height: 20rem;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
 }
 
 .text-xl, .text-2xl, .text-3xl {
@@ -33,72 +69,78 @@ h1 {
   word-spacing: 2.5rem;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-  padding: 20px;
-}
-
-.text-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  max-width: 100%;
-  overflow-wrap: break-word;
-  min-height: 20rem;
-  margin-bottom: 20px;
-}
-
 .button-container {
-  margin-bottom: 10em;
+  margin-bottom: 5em;
+  width: 100%;
+  max-width: 400px;
+}
+
+.next-button {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  font-weight: bold;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  transition: background-color 0.3s, transform 0.1s;
+  cursor: pointer;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.next-button:hover {
+  background-color: #45a049;
+}
+
+.next-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.level-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.level-button {
+  padding: 12px 15px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s;
+  background-color: #f0f0f0;
+  color: #333;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.level-button:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.level-button.active-level {
+  background-color: #3498db;
+  color: white;
+}
+
+.level-button.active-level:hover {
+  background-color: #2980b9;
 }
 
 .margin-left {
   margin-left: 1.5rem;
 }
 
-.next-button {
-  width: 100%;
-  background-color: #3b82f6;
-  color: white;
-  font-weight: bold;
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  margin-bottom: 1.5rem;
-  transition: background-color 0.3s;
-}
-
-.next-button:hover {
-  background-color: #2563eb;
-}
-
-.level-buttons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.5rem;
-}
-
-.level-button {
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  transition: background-color 0.3s, color 0.3s;
-  background-color: #e5e7eb;
-  color: #374151;
-}
-
-.level-button:hover {
-  background-color: #d1d5db;
-}
-
-.level-button.active-level {
-  background-color: #10b981;
-  color: white;
+@media (min-width: 768px) {
+  .level-buttons {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
@@ -111,16 +153,23 @@ h1 {
 }
 
 @media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
   .text-xl {
-    font-size: 5rem;
+    font-size: 4rem;
   }
   .text-2xl {
-    font-size: 5.5rem;
+    font-size: 4.5rem;
   }
   .text-3xl {
-    font-size: 5rem;
+    font-size: 4rem;
   }
   .text-4xl {
-    font-size: 4rem;
+    font-size: 3.5rem;
+  }
+  .next-button, .level-button {
+    font-size: 1rem;
+    padding: 10px 15px;
   }
 }
