@@ -1,4 +1,4 @@
-const colores = ['#FF0000', '#00FF00', '#0000FF', '#FF00FF', '#00FFFF', '#FFFF00'];
+const colores = ['#B07D62', '#88B097', '#8796C0', '#C0A487', '#6F9FB0', '#B0B07A'];
 const vocales = ['a', 'e', 'i', 'o', 'u', 'á', 'é', 'í', 'ó', 'ú'];
 
 const combinacionesDosLetras = {
@@ -170,12 +170,12 @@ class MetodoLectura {
   }
 
   getConsonantColor(consonant) {
-    if (!this.consonantColors[consonant]) {
-      this.consonantColors[consonant] = colores[this.colorIndex];
-      this.colorIndex = (this.colorIndex + 1) % colores.length;
-    }
-    return this.consonantColors[consonant];
+  if (!this.consonantColors[consonant]) {
+    this.consonantColors[consonant] = colores[this.colorIndex];
+    this.colorIndex = (this.colorIndex + 1) % colores.length;
   }
+  return this.consonantColors[consonant];
+}
 
   renderLetra(letra, index, isLastInWord = false) {
     const span = document.createElement('span');
