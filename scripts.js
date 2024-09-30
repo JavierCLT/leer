@@ -1,4 +1,4 @@
-const colores = ['#B07D62', '#88B097', '#8796C0', '#C0A487', '#6F9FB0', '#B0B07A'];
+const colores = ['#264653', '#2a9d8f', '#e9c46a', '#C0A487', '#f4a261', '#e76f51'];
 const vocales = ['a', 'e', 'i', 'o', 'u', 'á', 'é', 'í', 'ó', 'ú'];
 
 const combinacionesDosLetras = {
@@ -170,32 +170,48 @@ class MetodoLectura {
   }
 
   getConsonantColor(consonant) {
+  // Treat "ch" and "ll" as single consonants
+  if (consonant.toLowerCase() === 'ch' || consonant.toLowerCase() === 'll') {
+    consonant = consonant.toLowerCase(); // Normalize to ensure consistency
+  }
+
   if (!this.consonantColors[consonant]) {
     this.consonantColors[consonant] = colores[this.colorIndex];
     this.colorIndex = (this.colorIndex + 1) % colores.length;
   }
+
   return this.consonantColors[consonant];
 }
 
   renderLetra(letra, index, isLastInWord = false) {
-    const span = document.createElement('span');
-    span.textContent = letra;
-    
-    const isConsonant = !vocales.includes(letra.toLowerCase());
-    if (isConsonant) {
-      span.style.color = this.getConsonantColor(letra.toLowerCase());
-    } else {
-      span.style.color = 'black';
-    }
-
-    span.style.display = 'inline-block';
-    span.style.fontWeight = 'bold';
-    span.style.marginRight = isLastInWord && this.nivel === 4 ? '1rem' : '0';
-    span.style.fontFamily = 'Andika Basic';
-    span.style.textShadow = 'none';
-    span.className = this.nivel === 1 ? 'text-3xl' : this.nivel === 2 ? 'text-2xl' : this.nivel === 3 ? 'text-xl' : 'text-4xl';
-    return span;
+  const span = document.createElement('span');
+  
+  // Detect if "ch" or "ll" is at this position and treat them as a unit
+  const nextLetra = this.contenido.consonante && this.contenido.consonante[index + 1];
+  
+  if ((letra === 'c' && nextLetra === 'h') || (letra === 'l' && nextLetra === 'l')) {
+    letra = letra + nextLetra;  // Combine "ch" or "ll" as a single unit
+    this.contenido.consonante = this.contenido.consonante.slice(0, index + 1) + this.contenido.consonante.slice(index + 2); // Skip next letter
   }
+
+  span.textContent = letra;
+
+  const isConsonant = !vocales.includes(letra.toLowerCase());
+  if (isConsonant) {
+    span.style.color = this.getConsonantColor(letra.toLowerCase());
+  } else {
+    span.style.color = 'black';
+  }
+
+  span.style.display = 'inline-block';
+  span.style.fontWeight = 'bold';
+  span.style.marginRight = isLastInWord && this.nivel === 4 ? '1rem' : '0';
+  span.style.fontFamily = 'Andika Basic';
+  span.style.textShadow = 'none';
+  span.className = this.nivel === 1 ? 'text-3xl' : this.nivel === 2 ? 'text-2xl' : this.nivel === 3 ? 'text-xl' : 'text-4xl';
+
+  return span;
+}
 
   renderContenido() {
     const container = document.getElementById('contenidoContainer');
