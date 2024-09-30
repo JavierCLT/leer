@@ -1,5 +1,4 @@
-// Constants and data
-const colores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'];
+const colores = ['#FF0000', '#00FF00', '#0000FF', '#FF00FF', '#00FFFF', '#FFFF00'];
 const vocales = ['a', 'e', 'i', 'o', 'u', 'á', 'é', 'í', 'ó', 'ú'];
 
 const combinacionesDosLetras = {
@@ -67,68 +66,23 @@ const palabrasNivel3 = [
 ];
 
 const frasesNivel4 = [
-  'El sol brilla',
-  'La luna es blanca',
-  'El perro ladra',
-  'El gato maulla',
-  'La flor es roja',
-  'El cielo es azul',
-  'La casa es grande',
-  'El árbol es alto',
-  'El pez nada',
-  'El pájaro vuela',
-  'La niña corre',
-  'El niño salta',
-  'La mesa es marrón',
-  'La silla es verde',
-  'El libro es nuevo',
-  'La puerta está abierta',
-  'La ventana está cerrada',
-  'El coche es rápido',
-  'La bici es pequeña',
-  'El tren es largo',
-  'Una casa bonita',
-  'La pared es blanca',
-  'Un parque para niños',
-  'Un libro pequeño',
-  'Mi amigo se llama Michael',
-  'Mi padre es mayor que yo',
-  'Mis zapatos están limpios',
-  'La moto hace mucho ruido'
+  'El sol brilla', 'La luna es blanca', 'El perro ladra', 'El gato maulla',
+  'La flor es roja', 'El cielo es azul', 'La casa es grande', 'El árbol es alto',
+  'El pez nada', 'El pájaro vuela', 'La niña corre', 'El niño salta',
+  'La mesa es marrón', 'La silla es verde', 'El libro es nuevo',
+  'La puerta está abierta', 'La ventana está cerrada', 'El coche es rápido',
+  'La bici es pequeña', 'El tren es largo', 'Una casa bonita',
+  'La pared es blanca', 'Un parque para niños', 'Un libro pequeño',
+  'Mi amigo se llama Michael', 'Mi padre es mayor que yo',
+  'Mis zapatos están limpios', 'La moto hace mucho ruido'
 ];
 
-// Helper functions
-function generarSilabaSimple() {
-  const tipos = ['vc', 'cv', 'vv'];
-  const tipoAleatorio = tipos[Math.floor(Math.random() * tipos.length)];
-  const combinacionAleatoria = combinacionesDosLetras[tipoAleatorio].shift();
-  combinacionesDosLetras[tipoAleatorio].push(combinacionAleatoria);
-
-  if (tipoAleatorio === 'vc') {
-    return { consonante: combinacionAleatoria[1], vocal: combinacionAleatoria[0] };
-  } else if (tipoAleatorio === 'cv') {
-    return { consonante: combinacionAleatoria[0], vocal: combinacionAleatoria[1] };
-  } else {
-    return { consonante: combinacionAleatoria[0], vocal: combinacionAleatoria[1] };
-  }
-}
-
-function generarContenidoNivel2() {
-  const combinacionAleatoria = combinacionesTresLetras.cvc.shift();
-  combinacionesTresLetras.cvc.push(combinacionAleatoria);
-
-  return {
-    consonante: combinacionAleatoria.slice(0, -1),
-    vocal: combinacionAleatoria.slice(-1)
-  };
-}
-
-// Main class
 class MetodoLectura {
   constructor() {
     this.nivel = 1;
     this.contenido = {};
-    this.colorConsonante = '';
+    this.consonantColors = {};
+    this.colorIndex = 0;
     this.init();
   }
 
@@ -145,15 +99,40 @@ class MetodoLectura {
     });
   }
 
+  generarSilabaSimple() {
+    const tipos = ['vc', 'cv', 'vv'];
+    const tipoAleatorio = tipos[Math.floor(Math.random() * tipos.length)];
+    const combinacionAleatoria = combinacionesDosLetras[tipoAleatorio].shift();
+    combinacionesDosLetras[tipoAleatorio].push(combinacionAleatoria);
+
+    if (tipoAleatorio === 'vc') {
+      return { consonante: combinacionAleatoria[1], vocal: combinacionAleatoria[0] };
+    } else if (tipoAleatorio === 'cv') {
+      return { consonante: combinacionAleatoria[0], vocal: combinacionAleatoria[1] };
+    } else {
+      return { consonante: combinacionAleatoria[0], vocal: combinacionAleatoria[1] };
+    }
+  }
+
+  generarContenidoNivel2() {
+    const combinacionAleatoria = combinacionesTresLetras.cvc.shift();
+    combinacionesTresLetras.cvc.push(combinacionAleatoria);
+
+    return {
+      consonante: combinacionAleatoria.slice(0, -1),
+      vocal: combinacionAleatoria.slice(-1)
+    };
+  }
+
   generarContenido() {
     let siguiente;
     try {
       switch (this.nivel) {
         case 1:
-          siguiente = generarSilabaSimple();
+          siguiente = this.generarSilabaSimple();
           break;
         case 2:
-          siguiente = generarContenidoNivel2();
+          siguiente = this.generarContenidoNivel2();
           break;
         case 3:
           siguiente = { palabra: palabrasNivel3[Math.floor(Math.random() * palabrasNivel3.length)] };
@@ -162,7 +141,7 @@ class MetodoLectura {
           siguiente = { frase: frasesNivel4[Math.floor(Math.random() * frasesNivel4.length)] };
           break;
         default:
-          siguiente = generarSilabaSimple();
+          siguiente = this.generarSilabaSimple();
       }
     } catch (error) {
       console.error("Error generando contenido:", error);
@@ -170,7 +149,6 @@ class MetodoLectura {
     }
 
     this.contenido = siguiente;
-    this.colorConsonante = colores[Math.floor(Math.random() * colores.length)];
     this.render();
   }
 
@@ -188,63 +166,3 @@ class MetodoLectura {
       } else {
         button.classList.remove('active-level');
       }
-    });
-  }
-
-  renderLetra(letra, index, isLastInWord = false) {
-    const span = document.createElement('span');
-    span.textContent = letra;
-    span.style.color = vocales.includes(letra.toLowerCase()) ? 'black' : this.colorConsonante;
-    span.style.display = 'inline-block';
-    span.style.fontWeight = 'bold';
-    span.style.marginRight = isLastInWord && this.nivel === 4 ? '1rem' : '0';
-    span.style.fontFamily = 'Andika Basic';
-    span.style.textShadow = 'none';
-    span.className = this.nivel === 1 ? 'text-3xl' : this.nivel === 2 ? 'text-2xl' : this.nivel === 3 ? 'text-xl' : 'text-4xl';
-    return span;
-  }
-
-  renderContenido() {
-    const container = document.getElementById('contenidoContainer');
-    container.innerHTML = '';
-    container.className = `text-container ${this.nivel === 4 ? 'margin-left' : ''}`;
-
-    if ('frase' in this.contenido) {
-      this.contenido.frase.split(' ').forEach((palabra, idx) => {
-        const palabraDiv = document.createElement('div');
-        palabraDiv.style.display = 'flex';
-        palabraDiv.style.marginRight = '1rem';
-        palabra.split('').forEach((letra, letraIdx, arr) => {
-          palabraDiv.appendChild(this.renderLetra(letra, `${idx}-${letraIdx}`, letraIdx === arr.length - 1));
-        });
-        container.appendChild(palabraDiv);
-      });
-    } else if ('palabra' in this.contenido) {
-      this.contenido.palabra.split('').forEach((letra, index) => {
-        container.appendChild(this.renderLetra(letra, index));
-      });
-    } else if ('consonante' in this.contenido && 'vocal' in this.contenido) {
-      this.contenido.consonante.split('').forEach((letra, index) => {
-        container.appendChild(this.renderLetra(letra, 'c' + index));
-      });
-      this.contenido.vocal.split('').forEach((letra, index) => {
-        container.appendChild(this.renderLetra(letra, 'v' + index));
-      });
-    } else {
-      const errorSpan = document.createElement('span');
-      errorSpan.textContent = 'Error';
-      errorSpan.className = 'text-3xl';
-      container.appendChild(errorSpan);
-    }
-  }
-
-  render() {
-    this.renderContenido();
-    this.updateLevelButtons();
-  }
-}
-
-// Initialize the app when the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  new MetodoLectura();
-});
