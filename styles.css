@@ -48,10 +48,11 @@ h1 {
   text-align: center;
   font-family: 'Andika Basic', sans-serif;
   color: #333;
-  font-size: 2rem; /* Larger font size */
+  font-size: 1.8rem; /* Adjusted font size */
   margin: 10px 0; /* Reduced margin */
 }
 
+/* Responsive font size */
 #contenidoContainer {
   display: flex;
   flex-wrap: wrap;
@@ -62,7 +63,21 @@ h1 {
   overflow-wrap: break-word;
   margin-bottom: 10px;
   padding: 10px;
-  font-size: 4.5em; /* Increased font size */
+  font-size: 3em; /* Default font size for content */
+  line-height: 1.2;
+}
+
+/* Responsive font size for different screen sizes */
+@media (max-height: 700px) {
+  #contenidoContainer {
+    font-size: 2.5em; /* Slightly smaller font size on smaller height */
+  }
+}
+
+@media (max-height: 600px) {
+  #contenidoContainer {
+    font-size: 2.2em; /* Further reduce font size for very small screens */
+  }
 }
 
 /* Buttons Container */
@@ -70,7 +85,7 @@ h1 {
   width: 100%;
   max-width: 400px;
   margin-top: auto;
-  margin-bottom: 10px; /* Add margin below the buttons */
+  margin-bottom: 20px; /* Increased margin for white space below */
 }
 
 /* Next Button */
@@ -136,11 +151,11 @@ h1 {
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
   h1 {
-    font-size: 1.8rem; /* Adjust title font size */
+    font-size: 1.6rem; /* Adjust title font size */
   }
   
   #contenidoContainer {
-    font-size: 4rem; /* Adjust content font size */
+    font-size: 2.8em; /* Adjust content font size */
   }
 
   .level-button {
