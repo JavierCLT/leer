@@ -1,4 +1,4 @@
-const colores = ['#264653', '#2a9d8f', '#e9c46a', '#C0A487', '#f4a261', '#e76f51'];
+const colores = ['#c1121f', '#2a9d8f', '#e9c46a', '#C0A487', '#f4a261', '#e76f51'];
 const vocales = ['a', 'e', 'i', 'o', 'u', 'á', 'é', 'í', 'ó', 'ú'];
 
 const combinacionesDosLetras = {
