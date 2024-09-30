@@ -166,3 +166,5 @@ class MetodoLectura {
       } else {
         button.classList.remove('active-level');
       }
+    }
+  }                                                   
