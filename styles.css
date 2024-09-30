@@ -135,10 +135,7 @@ h1 {
     font-size: 2rem; /* Adjust font size for content on smaller screens */
   }
 
-  .level-buttons {
-    flex-wrap: wrap;
-  }
-  
+   
   .level-button {
     flex-basis: calc(50% - 5px);
     margin-bottom: 10px;
