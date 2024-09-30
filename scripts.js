@@ -166,5 +166,78 @@ class MetodoLectura {
       } else {
         button.classList.remove('active-level');
       }
+    });
+  }
+
+  getConsonantColor(consonant) {
+    if (!this.consonantColors[consonant]) {
+      this.consonantColors[consonant] = colores[this.colorIndex];
+      this.colorIndex = (this.colorIndex + 1) % colores.length;
     }
-  }                                                   
+    return this.consonantColors[consonant];
+  }
+
+  renderLetra(letra, index, isLastInWord = false) {
+    const span = document.createElement('span');
+    span.textContent = letra;
+    
+    const isConsonant = !vocales.includes(letra.toLowerCase());
+    if (isConsonant) {
+      span.style.color = this.getConsonantColor(letra.toLowerCase());
+    } else {
+      span.style.color = 'black';
+    }
+
+    span.style.display = 'inline-block';
+    span.style.fontWeight = 'bold';
+    span.style.marginRight = isLastInWord && this.nivel === 4 ? '1rem' : '0';
+    span.style.fontFamily = 'Andika Basic';
+    span.style.textShadow = 'none';
+    span.className = this.nivel === 1 ? 'text-3xl' : this.nivel === 2 ? 'text-2xl' : this.nivel === 3 ? 'text-xl' : 'text-4xl';
+    return span;
+  }
+
+  renderContenido() {
+    const container = document.getElementById('contenidoContainer');
+    container.innerHTML = '';
+    container.className = `text-container ${this.nivel === 4 ? 'margin-left' : ''}`;
+
+    if ('frase' in this.contenido) {
+      this.contenido.frase.split(' ').forEach((palabra, idx) => {
+        const palabraDiv = document.createElement('div');
+        palabraDiv.style.display = 'flex';
+        palabraDiv.style.marginRight = '1rem';
+        palabra.split('').forEach((letra, letraIdx, arr) => {
+          palabraDiv.appendChild(this.renderLetra(letra, `${idx}-${letraIdx}`, letraIdx === arr.length - 1));
+        });
+        container.appendChild(palabraDiv);
+      });
+    } else if ('palabra' in this.contenido) {
+      this.contenido.palabra.split('').forEach((letra, index) => {
+        container.appendChild(this.renderLetra(letra, index));
+      });
+    } else if ('consonante' in this.contenido && 'vocal' in this.contenido) {
+      this.contenido.consonante.split('').forEach((letra, index) => {
+        container.appendChild(this.renderLetra(letra, 'c' + index));
+      });
+      this.contenido.vocal.split('').forEach((letra, index) => {
+        container.appendChild(this.renderLetra(letra, 'v' + index));
+      });
+    } else {
+      const errorSpan = document.createElement('span');
+      errorSpan.textContent = 'Error';
+      errorSpan.className = 'text-3xl';
+      container.appendChild(errorSpan);
+    }
+  }
+
+  render() {
+    this.renderContenido();
+    this.updateLevelButtons();
+  }
+}
+
+// Initialize the app when the DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  new MetodoLectura();
+});
