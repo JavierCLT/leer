@@ -1,4 +1,3 @@
-/* General Styles */
 @font-face {
   font-family: 'Andika Basic';
   src: url('fonts/AndikaBasic-Regular.woff2') format('woff2');
@@ -15,7 +14,7 @@
 
 html, body {
   height: 100%;
-  overflow: hidden; /* Prevent scrolling */
+  overflow: hidden;
 }
 
 body {
@@ -23,71 +22,52 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white; /* All background is white */
-  height: 100vh; /* Full viewport height */
+  background-color: white;
+  height: 100vh;
   margin: 0;
-  width: 100%; /* Ensure full width is used */
+  width: 100%;
 }
 
-/* Container for the entire content */
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Space between content */
+  justify-content: space-between;
   align-items: center;
-  width: 100%; /* Full width */
-  height: 95vh; /* Adjusted height to ensure everything fits */
+  width: 100%;
+  height: 100vh;
   max-width: 800px;
-  padding: 10px;
+  padding: 20px;
   background-color: white;
 }
 
-/* Title - Adjust for different screen sizes */
 h1 {
   text-align: center;
   font-family: 'Andika Basic', sans-serif;
   color: #333;
-  font-size: 1.8rem; /* Adjusted font size */
-  margin: 10px 0; /* Reduced margin */
+  font-size: 1.8rem;
+  margin: 10px 0;
 }
 
-/* Responsive font size with reduced line spacing */
 #contenidoContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   max-width: 100%;
-  flex-grow: 1; /* Allow content to grow */
+  flex-grow: 1;
   overflow-wrap: break-word;
-  margin-bottom: 10px;
   padding: 10px;
-  font-size: 3em; /* Default font size for content */
-  line-height: 1; /* Reduced line height */
+  font-size: 3em;
+  line-height: 1.2;
 }
 
-/* Responsive font size for different screen sizes */
-@media (max-height: 700px) {
-  #contenidoContainer {
-    font-size: 2.5em; /* Slightly smaller font size on smaller height */
-  }
-}
-
-@media (max-height: 600px) {
-  #contenidoContainer {
-    font-size: 2.2em; /* Further reduce font size for very small screens */
-  }
-}
-
-/* Buttons Container */
 .button-container {
   width: 100%;
   max-width: 400px;
   margin-top: auto;
-  margin-bottom: 20px; /* Increased margin for white space below */
+  padding-bottom: 20px;
 }
 
-/* Next Button */
 .next-button {
   width: 100%;
   background-color: #3498db;
@@ -96,10 +76,10 @@ h1 {
   padding: 15px 20px;
   border: none;
   border-radius: 8px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   transition: background-color 0.3s, transform 0.1s;
   cursor: pointer;
-  font-size: 1.5rem; /* Larger font size for buttons */
+  font-size: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -112,17 +92,16 @@ h1 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Level Buttons */
 .level-buttons {
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  flex-wrap: nowrap; /* Ensure all buttons are in the same row */
+  flex-wrap: nowrap;
 }
 
 .level-button {
   flex: 1;
-  padding: 15px 20px;
+  padding: 12px 15px;
   border-radius: 8px;
   font-weight: 600;
   transition: all 0.3s;
@@ -130,7 +109,7 @@ h1 {
   color: #333;
   border: none;
   cursor: pointer;
-  font-size: 1.2rem; /* Larger font size for level buttons */
+  font-size: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -147,25 +126,53 @@ h1 {
   background-color: #45a049;
 }
 
-/* Mobile Responsive Styles */
 @media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
   h1 {
-    font-size: 1.6rem; /* Adjust title font size */
+    font-size: 1.6rem;
   }
   
   #contenidoContainer {
-    font-size: 2.8em; /* Adjust content font size */
+    font-size: 2.5em;
   }
 
   .level-button {
-    flex-basis: calc(50% - 5px); /* Make buttons fit in one row */
-    margin-bottom: 10px;
+    font-size: 0.9rem;
+    padding: 10px 12px;
   }
 }
 
 @media (max-width: 480px) {
+  #contenidoContainer {
+    font-size: 2.2em;
+  }
+
   .next-button, .level-button {
-    font-size: 1.2rem; /* Adjust button font size */
-    padding: 12px 15px;
+    font-size: 1rem;
+    padding: 10px 12px;
+  }
+}
+
+@media (max-height: 600px) {
+  .container {
+    justify-content: flex-start;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+    margin: 5px 0;
+  }
+
+  #contenidoContainer {
+    font-size: 2em;
+    flex-grow: 0;
+    margin-bottom: 10px;
+  }
+
+  .button-container {
+    padding-bottom: 10px;
   }
 }
