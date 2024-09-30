@@ -17,7 +17,7 @@ body {
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   background-color: #f5f5f5;
 }
 
@@ -43,7 +43,7 @@ h1 {
   font-size: 2.5rem;
 }
 
-.text-container {
+#contenidoContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -53,31 +53,17 @@ h1 {
   min-height: 20rem;
   margin-bottom: 30px;
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-}
-
-.text-xl, .text-2xl, .text-3xl {
-  font-size: 6rem;
-  line-height: 1.2;
-  word-spacing: 2.5rem;
-}
-
-.text-4xl {
-  font-size: 5rem;
-  line-height: 1.2;
-  word-spacing: 2.5rem;
 }
 
 .button-container {
-  margin-bottom: 5em;
   width: 100%;
   max-width: 400px;
+  margin-top: auto;
 }
 
 .next-button {
   width: 100%;
-  background-color: #4CAF50;
+  background-color: #3498db;
   color: white;
   font-weight: bold;
   padding: 15px 20px;
@@ -91,7 +77,7 @@ h1 {
 }
 
 .next-button:hover {
-  background-color: #45a049;
+  background-color: #2980b9;
 }
 
 .next-button:active {
@@ -100,12 +86,13 @@ h1 {
 }
 
 .level-buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  justify-content: space-between;
   gap: 10px;
 }
 
 .level-button {
+  flex: 1;
   padding: 12px 15px;
   border-radius: 8px;
   font-weight: 600;
@@ -120,54 +107,33 @@ h1 {
 
 .level-button:hover {
   background-color: #e0e0e0;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .level-button.active-level {
-  background-color: #3498db;
+  background-color: #4CAF50;
   color: white;
 }
 
 .level-button.active-level:hover {
-  background-color: #2980b9;
-}
-
-.margin-left {
-  margin-left: 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .level-buttons {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  background-color: #45a049;
 }
 
 @media (max-width: 768px) {
-  .text-xl, .text-2xl, .text-3xl {
-    font-size: 5rem;
+  h1 {
+    font-size: 2rem;
   }
-  .text-4xl {
-    font-size: 4rem;
+  
+  .level-buttons {
+    flex-wrap: wrap;
+  }
+  
+  .level-button {
+    flex-basis: calc(50% - 5px);
+    margin-bottom: 10px;
   }
 }
 
 @media (max-width: 480px) {
-  h1 {
-    font-size: 2rem;
-  }
-  .text-xl {
-    font-size: 4rem;
-  }
-  .text-2xl {
-    font-size: 4.5rem;
-  }
-  .text-3xl {
-    font-size: 4rem;
-  }
-  .text-4xl {
-    font-size: 3.5rem;
-  }
   .next-button, .level-button {
     font-size: 1rem;
     padding: 10px 15px;
