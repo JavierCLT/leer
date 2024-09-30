@@ -1,5 +1,6 @@
 const colores = ['#c1121f', '#2a9d8f', '#e9c46a', '#219ebc', '#f4a261', '#e76f51'];
 const vocales = ['a', 'e', 'i', 'o', 'u', 'á', 'é', 'í', 'ó', 'ú'];
+let lastConsonantColor = '';  // Track the last consonant color applied
 
 const combinacionesDosLetras = {
   vc: [
@@ -169,7 +170,7 @@ class MetodoLectura {
     });
   }
 
-  let lastConsonantColor = '';  // Track the last consonant color applied
+  
   
   getConsonantColor(consonant) {
   // Handle special cases like "ch", "ll", "rr", "cc"
