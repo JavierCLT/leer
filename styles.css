@@ -5,53 +5,45 @@
   font-style: normal;
   font-display: swap;
 }
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
 html, body {
   height: 100%;
   overflow: hidden;
 }
-
 body {
   font-family: 'Andika Basic', sans-serif;
   display: flex;
   justify-content: center;
-  align-items: center; /* Added to vertically center the content */
   background-color: white;
   height: 100vh;
   margin: 0;
   width: 100%;
 }
-
 .container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 90vh; /* Increased from 70vh to use more vertical space */
+  height: 70vh;
   max-width: 800px;
   padding: 10px;
   background-color: white;
 }
-
 header {
   width: 100%;
   text-align: center;
 }
-
 h1 {
   font-family: 'Andika Basic', sans-serif;
   color: #333;
   font-size: 1.8rem;
   margin: 10px 0;
 }
-
 main {
   display: flex;
   flex-wrap: wrap;
@@ -64,14 +56,12 @@ main {
   font-size: 3em;
   line-height: 1.1;
 }
-
 footer {
   width: 100%;
   max-width: 400px;
   margin-top: auto;
-  padding-bottom: 20px; /* Increased to add more space below buttons */
+  padding-bottom: 10px;
 }
-
 .next-button {
   width: 100%;
   background-color: #3498db;
@@ -86,23 +76,31 @@ footer {
   font-size: 1.3rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
 .next-button:hover {
   background-color: #2980b9;
 }
-
+.text-3xl {
+  font-size: 40px;
+}
+.text-4xl {
+  font-size: 40px;
+}
+.text-2xl {
+  font-size: 40px;
+}
+.text-xl {
+  font-size: 40px;
+}
 .next-button:active {
   transform: translateY(2px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 .level-buttons {
   display: flex;
   justify-content: space-between;
   gap: 8px;
   flex-wrap: nowrap;
 }
-
 .level-button {
   flex: 1;
   padding: 10px 12px;
@@ -116,90 +114,61 @@ footer {
   font-size: 0.9rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 .level-button:hover {
   background-color: #e0e0e0;
 }
-
 .level-button.active-level {
   background-color: #4CAF50;
   color: white;
 }
-
 .level-button.active-level:hover {
   background-color: #45a049;
 }
-
-/* Unified text sizes for better consistency */
-.text-3xl, .text-4xl, .text-2xl, .text-xl {
-  font-size: 40px;
-}
-
-/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .container {
-    height: 100vh; /* Use full height on smaller screens */
     padding: 8px;
   }
-  
+
   h1 {
     font-size: 1.5rem;
   }
-  
+
   main {
     font-size: 2.5em;
   }
-  
+
   .level-button {
     font-size: 0.8rem;
     padding: 8px 10px;
   }
-  
-  /* Adjust text sizes for smaller screens */
-  .text-3xl, .text-4xl, .text-2xl, .text-xl {
-    font-size: 36px;
-  }
 }
-
 @media (max-width: 480px) {
   main {
     font-size: 2.2em;
   }
-  
+
   .next-button, .level-button {
     font-size: 0.9rem;
     padding: 8px 10px;
   }
-  
-  /* Further adjust text sizes for very small screens */
-  .text-3xl, .text-4xl, .text-2xl, .text-xl {
-    font-size: 32px;
-  }
 }
-
 @media (max-height: 600px) {
   .container {
-    height: 100vh; /* Use full height on shorter screens */
-    justify-content: space-between; /* Distribute space evenly */
+    justify-content: flex-start;
   }
-  
+
   h1 {
     font-size: 1.3rem;
     margin: 5px 0;
   }
-  
+
   main {
     font-size: 2em;
-    flex-grow: 1; /* Allow main content to grow */
+    flex-grow: 0;
     margin-bottom: 8px;
   }
-  
+
   footer {
     padding-bottom: 8px;
-  }
-  
-  /* Adjust text sizes for shorter screens */
-  .text-3xl, .text-4xl, .text-2xl, .text-xl {
-    font-size: 28px;
   }
 }
