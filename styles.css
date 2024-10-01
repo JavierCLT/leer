@@ -90,9 +90,19 @@ footer {
   background-color: #2980b9;
 }
 
-.this.nivel {
+.text-3xl {
   font-size: 40px;
 }
+.text-4xl {
+  font-size: 40px;
+}
+.text-2xl {
+  font-size: 40px;
+}
+.text-xl {
+  font-size: 40px;
+}
+
 .next-button:active {
   transform: translateY(2px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
