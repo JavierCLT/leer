@@ -100,9 +100,60 @@ class MetodoLectura {
     });
   }
 
-  // ... [generarSilabaSimple, generarContenidoNivel2, and generarContenido methods remain unchanged]
+  generarSilabaSimple() {
+    const tipos = ['vc', 'cv', 'vv'];
+    const tipoAleatorio = tipos[Math.floor(Math.random() * tipos.length)];
+    const combinacionAleatoria = combinacionesDosLetras[tipoAleatorio].shift();
+    combinacionesDosLetras[tipoAleatorio].push(combinacionAleatoria);
 
-  setNivel(newNivel) {
+    if (tipoAleatorio === 'vc') {
+      return { consonante: combinacionAleatoria[1], vocal: combinacionAleatoria[0] };
+    } else if (tipoAleatorio === 'cv') {
+      return { consonante: combinacionAleatoria[0], vocal: combinacionAleatoria[1] };
+    } else {
+      return { consonante: combinacionAleatoria[0], vocal: combinacionAleatoria[1] };
+    }
+  }
+
+  generarContenidoNivel2() {
+    const combinacionAleatoria = combinacionesTresLetras.cvc.shift();
+    combinacionesTresLetras.cvc.push(combinacionAleatoria);
+
+    return {
+      consonante: combinacionAleatoria.slice(0, -1),
+      vocal: combinacionAleatoria.slice(-1)
+    };
+  }
+
+  generarContenido() {
+    let siguiente;
+    try {
+      switch (this.nivel) {
+        case 1:
+          siguiente = this.generarSilabaSimple();
+          break;
+        case 2:
+          siguiente = this.generarContenidoNivel2();
+          break;
+        case 3:
+          siguiente = { palabra: palabrasNivel3[Math.floor(Math.random() * palabrasNivel3.length)] };
+          break;
+        case 4:
+          siguiente = { frase: frasesNivel4[Math.floor(Math.random() * frasesNivel4.length)] };
+          break;
+        default:
+          siguiente = this.generarSilabaSimple();
+      }
+    } catch (error) {
+      console.error("Error generando contenido:", error);
+      siguiente = { consonante: 'e', vocal: 'r' };
+    }
+
+    this.contenido = siguiente;
+    this.render();
+  }
+
+ setNivel(newNivel) {
     this.nivel = newNivel;
     this.generarContenido();
     this.updateLevelButtons();
@@ -121,18 +172,48 @@ class MetodoLectura {
     });
   }
 
+  
+  
   getConsonantColor(consonant) {
-    // ... [This method remains unchanged]
+  // Handle special cases like "ch", "ll", "rr", "cc"
+  if (consonant.toLowerCase() === 'ch' || consonant.toLowerCase() === 'll' || consonant.toLowerCase() === 'rr' || consonant.toLowerCase() === 'cc') {
+    consonant = consonant.toLowerCase();
   }
+
+  if (!this.consonantColors[consonant]) {
+    let newColor;
+    // Ensure new color is not the same as the last applied consonant color
+    do {
+      newColor = colores[this.colorIndex];
+      this.colorIndex = (this.colorIndex + 1) % colores.length;
+    } while (newColor === lastConsonantColor);  // Avoid assigning the same color consecutively
+    
+    this.consonantColors[consonant] = newColor;
+    lastConsonantColor = newColor;  // Set the last consonant color
+  }
+
+  return this.consonantColors[consonant];
+}
 
   renderLetra(letra, index, isLastInWord = false) {
     const span = document.createElement('span');
-    
-    // ... [Special case handling remains unchanged]
+  
+  // Detect if "ch", "ll", "rr", or "cc" is at this position and treat them as a unit
+  const nextLetra = this.contenido.consonante && this.contenido.consonante[index + 1];
+  
+  // Handle special consonant combinations
+  if ((letra === 'c' && nextLetra === 'h') || 
+      (letra === 'l' && nextLetra === 'l') ||
+      (letra === 'r' && nextLetra === 'r') ||
+      (letra === 'c' && nextLetra === 'c')) {
+    letra = letra + nextLetra;  // Combine the special case into a single unit
+    this.contenido.consonante = this.contenido.consonante.slice(0, index + 1) + this.contenido.consonante.slice(index + 2); // Skip the next letter
+  }
 
-    span.textContent = letra;
+  span.textContent = letra;
 
-    const isConsonant = !vocales.includes(letra.toLowerCase());
+  // Check if the letter is a consonant
+  const isConsonant = !vocales.includes(letra.toLowerCase());
     
     if (isConsonant) {
       span.style.color = this.getConsonantColor(letra.toLowerCase());
