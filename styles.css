@@ -21,6 +21,7 @@ body {
   font-family: 'Andika Basic', sans-serif;
   display: flex;
   justify-content: center;
+  align-items: center; /* Added to vertically center the content */
   background-color: white;
   height: 100vh;
   margin: 0;
@@ -33,7 +34,7 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 70vh;
+  height: 90vh; /* Increased from 70vh to use more vertical space */
   max-width: 800px;
   padding: 10px;
   background-color: white;
@@ -68,7 +69,7 @@ footer {
   width: 100%;
   max-width: 400px;
   margin-top: auto;
-  padding-bottom: 10px;
+  padding-bottom: 20px; /* Increased to add more space below buttons */
 }
 
 .next-button {
@@ -88,19 +89,6 @@ footer {
 
 .next-button:hover {
   background-color: #2980b9;
-}
-
-.text-3xl {
-  font-size: 40px;
-}
-.text-4xl {
-  font-size: 40px;
-}
-.text-2xl {
-  font-size: 40px;
-}
-.text-xl {
-  font-size: 40px;
 }
 
 .next-button:active {
@@ -142,8 +130,15 @@ footer {
   background-color: #45a049;
 }
 
+/* Unified text sizes for better consistency */
+.text-3xl, .text-4xl, .text-2xl, .text-xl {
+  font-size: 40px;
+}
+
+/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .container {
+    height: 100vh; /* Use full height on smaller screens */
     padding: 8px;
   }
   
@@ -159,6 +154,11 @@ footer {
     font-size: 0.8rem;
     padding: 8px 10px;
   }
+  
+  /* Adjust text sizes for smaller screens */
+  .text-3xl, .text-4xl, .text-2xl, .text-xl {
+    font-size: 36px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -170,11 +170,17 @@ footer {
     font-size: 0.9rem;
     padding: 8px 10px;
   }
+  
+  /* Further adjust text sizes for very small screens */
+  .text-3xl, .text-4xl, .text-2xl, .text-xl {
+    font-size: 32px;
+  }
 }
 
 @media (max-height: 600px) {
   .container {
-    justify-content: flex-start;
+    height: 100vh; /* Use full height on shorter screens */
+    justify-content: space-between; /* Distribute space evenly */
   }
   
   h1 {
@@ -184,11 +190,16 @@ footer {
   
   main {
     font-size: 2em;
-    flex-grow: 0;
+    flex-grow: 1; /* Allow main content to grow */
     margin-bottom: 8px;
   }
   
   footer {
     padding-bottom: 8px;
+  }
+  
+  /* Adjust text sizes for shorter screens */
+  .text-3xl, .text-4xl, .text-2xl, .text-xl {
+    font-size: 28px;
   }
 }
